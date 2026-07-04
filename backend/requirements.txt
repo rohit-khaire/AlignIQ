@@ -1,0 +1,10 @@
+pymupdf4llm
+langchain-pinecone
+langchain
+pinecone
+python-dotenv
+fastapi
+uvicorn
+python-multipart
+langchain-groq
+fpdf2  

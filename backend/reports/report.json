@@ -1,0 +1,1093 @@
+[
+  {
+    "policy_id": "AUTH-001",
+    "policy_title": "Password Complexity Requirements",
+    "overall_status": "Partially Satisfied",
+    "confidence": 72,
+    "summary": {
+      "total_requirements": 7,
+      "satisfied": 3,
+      "partially_satisfied": 3,
+      "not_satisfied": 1,
+      "compliance_percentage": 64
+    },
+    "requirements": [
+      {
+        "requirement_id": "AUTH-001-R1",
+        "requirement_text": "Credentials must never be transmitted or stored in plaintext.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-002",
+            "title": "Password Storage Standard",
+            "similarity_score": 0.8704,
+            "evidence_snippet": "Application passwords must be stored only as salted cryptographic hashes and must never be stored or transmitted in plaintext.",
+            "supports_requirement": "This policy explicitly prohibits storing or transmitting passwords in plaintext."
+          }
+        ],
+        "confidence": 90,
+        "reasoning": "This requirement is satisfied because CP-002 explicitly prohibits storing or transmitting passwords in plaintext.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "AUTH-001-R2",
+        "requirement_text": "Authentication attempts must be rate-limited to reduce brute-force exposure.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-006",
+            "title": "Login Rate Protection",
+            "similarity_score": 0.8755,
+            "evidence_snippet": "Internet-facing login services must implement rate limiting or account lockout mechanisms to reduce brute-force attacks.",
+            "supports_requirement": "This policy requires rate limiting or account lockout mechanisms to prevent brute-force attacks."
+          }
+        ],
+        "confidence": 85,
+        "reasoning": "This requirement is partially satisfied because CP-006 requires rate limiting or account lockout mechanisms, but it does not explicitly mention authentication attempts.",
+        "recommended_action": "Implement rate limiting or account lockout mechanisms for all authentication attempts, not just internet-facing login services."
+      },
+      {
+        "requirement_id": "AUTH-001-R3",
+        "requirement_text": "Default vendor credentials must be changed prior to production deployment.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-003",
+            "title": "Vendor Account Hardening",
+            "similarity_score": 0.8939,
+            "evidence_snippet": "All default usernames and vendor-supplied passwords must be changed before any server or application is moved into production.",
+            "supports_requirement": "This policy requires changing default vendor credentials before production deployment."
+          }
+        ],
+        "confidence": 95,
+        "reasoning": "This requirement is satisfied because CP-003 explicitly requires changing default vendor credentials before production deployment.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "AUTH-001-R4",
+        "requirement_text": "Authentication events must be logged with timestamp, source IP, and outcome.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-001",
+            "title": "Centralized Authentication Logging",
+            "similarity_score": 0.8827,
+            "evidence_snippet": "Every successful and failed login attempt must be recorded with timestamp, source IP address, username, and authentication outcome.",
+            "supports_requirement": "This policy requires logging authentication events with timestamp, source IP address, username, and authentication outcome."
+          }
+        ],
+        "confidence": 80,
+        "reasoning": "This requirement is partially satisfied because CP-001 requires logging authentication events with timestamp, source IP address, username, and authentication outcome, but it does not explicitly mention source IP.",
+        "recommended_action": "Modify CP-001 to explicitly require logging source IP."
+      },
+      {
+        "requirement_id": "AUTH-001-R5",
+        "requirement_text": "Session tokens issued after authentication must expire after a defined inactivity period.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "There is no evidence in the retrieved policies that session tokens expire after a defined inactivity period.",
+        "recommended_action": "Implement session token expiration after a defined inactivity period."
+      },
+      {
+        "requirement_id": "AUTH-001-R6",
+        "requirement_text": "Authentication mechanisms must be reviewed at least annually for continued adequacy.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-005",
+            "title": "Authentication Security Review",
+            "similarity_score": 0.8571,
+            "evidence_snippet": "Authentication systems shall undergo a documented security review every year to verify their continued effectiveness.",
+            "supports_requirement": "This policy requires reviewing authentication mechanisms at least annually."
+          }
+        ],
+        "confidence": 90,
+        "reasoning": "This requirement is satisfied because CP-005 explicitly requires reviewing authentication mechanisms at least annually.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "AUTH-001-R7",
+        "requirement_text": "Fallback or legacy authentication paths must be disabled unless formally approved.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-004",
+            "title": "Legacy Authentication Exception",
+            "similarity_score": 0.8316,
+            "evidence_snippet": "Legacy authentication protocols may remain enabled if they are required by older business applications.",
+            "supports_requirement": "This policy allows legacy authentication protocols to remain enabled under certain conditions."
+          }
+        ],
+        "confidence": 70,
+        "reasoning": "This requirement is partially satisfied because CP-004 allows legacy authentication protocols to remain enabled under certain conditions, but it does not explicitly require disabling fallback or legacy authentication paths unless formally approved.",
+        "recommended_action": "Modify CP-004 to explicitly require disabling fallback or legacy authentication paths unless formally approved."
+      }
+    ],
+    "next_actions": [
+      "Implement rate limiting or account lockout mechanisms for all authentication attempts, not just internet-facing login services.",
+      "Modify CP-001 to explicitly require logging source IP.",
+      "Implement session token expiration after a defined inactivity period.",
+      "Modify CP-004 to explicitly require disabling fallback or legacy authentication paths unless formally approved."
+    ]
+  },
+  {
+    "policy_id": "AUTH-002",
+    "policy_title": "Account Lockout Thresholds",
+    "overall_status": "Partially Satisfied",
+    "confidence": 47,
+    "summary": {
+      "total_requirements": 7,
+      "satisfied": 2,
+      "partially_satisfied": 2,
+      "not_satisfied": 3,
+      "compliance_percentage": 42
+    },
+    "requirements": [
+      {
+        "requirement_id": "AUTH-002-R1",
+        "requirement_text": "Default vendor credentials must be changed prior to production deployment.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-003",
+            "title": "Vendor Account Hardening",
+            "similarity_score": 0.8818,
+            "evidence_snippet": "All default usernames and vendor-supplied passwords must be changed before any server or application is moved into production.",
+            "supports_requirement": "This policy explicitly requires changing default vendor credentials before production deployment."
+          }
+        ],
+        "confidence": 90,
+        "reasoning": "The policy CP-003 directly addresses the requirement to change default vendor credentials before production deployment.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "AUTH-002-R2",
+        "requirement_text": "Authentication events must be logged with timestamp, source IP, and outcome.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-001",
+            "title": "Centralized Authentication Logging",
+            "similarity_score": 0.872,
+            "evidence_snippet": "Every successful and failed login attempt must be recorded with timestamp, source IP address, username, and authentication outcome.",
+            "supports_requirement": "This policy logs successful and failed login attempts with timestamp, source IP address, and outcome, but does not explicitly mention username."
+          }
+        ],
+        "confidence": 80,
+        "reasoning": "The policy CP-001 partially satisfies the requirement by logging timestamp, source IP address, and outcome, but misses logging the username.",
+        "recommended_action": "Update policy CP-001 to include logging the username for each authentication event."
+      },
+      {
+        "requirement_id": "AUTH-002-R3",
+        "requirement_text": "Session tokens issued after authentication must expire after a defined inactivity period.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "There is no policy that addresses the requirement for session tokens to expire after a defined inactivity period.",
+        "recommended_action": "Implement a policy that requires session tokens to expire after a defined inactivity period."
+      },
+      {
+        "requirement_id": "AUTH-002-R4",
+        "requirement_text": "Authentication mechanisms must be reviewed at least annually for continued adequacy.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-005",
+            "title": "Authentication Security Review",
+            "similarity_score": 0.8499,
+            "evidence_snippet": "Authentication systems shall undergo a documented security review every year to verify their continued effectiveness.",
+            "supports_requirement": "This policy requires an annual review of authentication mechanisms for continued adequacy."
+          }
+        ],
+        "confidence": 95,
+        "reasoning": "The policy CP-005 directly addresses the requirement for annual review of authentication mechanisms.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "AUTH-002-R5",
+        "requirement_text": "Fallback or legacy authentication paths must be disabled unless formally approved.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-004",
+            "title": "Legacy Authentication Exception",
+            "similarity_score": 0.8214,
+            "evidence_snippet": "Legacy authentication protocols may remain enabled if they are required by older business applications.",
+            "supports_requirement": "This policy allows legacy authentication protocols to remain enabled under certain conditions, but does not explicitly require formal approval."
+          }
+        ],
+        "confidence": 70,
+        "reasoning": "The policy CP-004 partially satisfies the requirement by allowing legacy authentication protocols to remain enabled under certain conditions, but does not explicitly require formal approval.",
+        "recommended_action": "Update policy CP-004 to require formal approval for enabling legacy authentication protocols."
+      },
+      {
+        "requirement_id": "AUTH-002-R6",
+        "requirement_text": "Shared or generic accounts are prohibited for individual authentication.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "There is no policy that prohibits shared or generic accounts for individual authentication.",
+        "recommended_action": "Implement a policy that prohibits shared or generic accounts for individual authentication."
+      },
+      {
+        "requirement_id": "AUTH-002-R7",
+        "requirement_text": "Authentication failures must not reveal whether a username or password was incorrect.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "There is no policy that addresses the requirement for authentication failures not to reveal whether a username or password was incorrect.",
+        "recommended_action": "Implement a policy that requires authentication failures not to reveal whether a username or password was incorrect."
+      }
+    ],
+    "next_actions": [
+      "Update policy CP-001 to include logging the username for each authentication event.",
+      "Implement a policy that requires session tokens to expire after a defined inactivity period.",
+      "Update policy CP-004 to require formal approval for enabling legacy authentication protocols.",
+      "Implement a policy that prohibits shared or generic accounts for individual authentication.",
+      "Implement a policy that requires authentication failures not to reveal whether a username or password was incorrect."
+    ]
+  },
+  {
+    "policy_id": "AUTH-003",
+    "policy_title": "Single Sign-On Enforcement",
+    "overall_status": "Partially Satisfied",
+    "confidence": 17,
+    "summary": {
+      "total_requirements": 5,
+      "satisfied": 0,
+      "partially_satisfied": 1,
+      "not_satisfied": 4,
+      "compliance_percentage": 10
+    },
+    "requirements": [
+      {
+        "requirement_id": "AUTH-003-R1",
+        "requirement_text": "Session tokens issued after authentication must expire after a defined inactivity period.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "No policy explicitly mentions session token expiration after inactivity.",
+        "recommended_action": "Implement a session token expiration mechanism based on inactivity period."
+      },
+      {
+        "requirement_id": "AUTH-003-R2",
+        "requirement_text": "Authentication mechanisms must be reviewed at least annually for continued adequacy.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-005",
+            "title": "Authentication Security Review",
+            "similarity_score": 0.852,
+            "evidence_snippet": "Authentication systems shall undergo a documented security review every year to verify their continued effectiveness.",
+            "supports_requirement": "This policy ensures annual review of authentication mechanisms, but does not explicitly state 'continued adequacy'."
+          }
+        ],
+        "confidence": 85,
+        "reasoning": "The policy mentions annual review, but the term 'continued adequacy' is not explicitly used.",
+        "recommended_action": "Update the policy to explicitly mention 'continued adequacy' in the annual review requirement."
+      },
+      {
+        "requirement_id": "AUTH-003-R3",
+        "requirement_text": "Fallback or legacy authentication paths must be disabled unless formally approved.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "Policy CP-004 allows legacy authentication protocols to remain enabled if required by older business applications, but does not mention formal approval.",
+        "recommended_action": "Implement a formal approval process for legacy authentication protocols and disable them by default."
+      },
+      {
+        "requirement_id": "AUTH-003-R4",
+        "requirement_text": "Shared or generic accounts are prohibited for individual authentication.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "Policy CP-008 allows shared administrator accounts for emergency maintenance, which contradicts this requirement.",
+        "recommended_action": "Prohibit shared or generic accounts for individual authentication and implement alternative emergency access procedures."
+      },
+      {
+        "requirement_id": "AUTH-003-R5",
+        "requirement_text": "Authentication failures must not reveal whether a username or password was incorrect.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "No policy explicitly mentions hiding authentication failure information.",
+        "recommended_action": "Implement a mechanism to hide authentication failure information, such as generic error messages."
+      }
+    ],
+    "next_actions": [
+      "Implement a session token expiration mechanism based on inactivity period.",
+      "Update the policy to explicitly mention 'continued adequacy' in the annual review requirement.",
+      "Implement a formal approval process for legacy authentication protocols and disable them by default.",
+      "Prohibit shared or generic accounts for individual authentication and implement alternative emergency access procedures.",
+      "Implement a mechanism to hide authentication failure information, such as generic error messages."
+    ]
+  },
+  {
+    "policy_id": "AUTHZ-001",
+    "policy_title": "Role-Based Access Control Enforcement",
+    "overall_status": "Partially Satisfied",
+    "confidence": 68,
+    "summary": {
+      "total_requirements": 5,
+      "satisfied": 0,
+      "partially_satisfied": 4,
+      "not_satisfied": 1,
+      "compliance_percentage": 40
+    },
+    "requirements": [
+      {
+        "requirement_id": "AUTHZ-001-R1",
+        "requirement_text": "Authorization policies must be version-controlled and peer-reviewed before deployment.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "No evidence of version control or peer review in the retrieved policies.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "AUTHZ-001-R2",
+        "requirement_text": "Default-deny must be the standard posture for all new resource types.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-012",
+            "title": "Default Deny for New Applications",
+            "similarity_score": 0.85,
+            "evidence_snippet": "All newly deployed applications must deny access by default until explicit permissions are granted.",
+            "supports_requirement": "This policy enforces default-deny for new applications, but it's unclear if this applies to all resource types."
+          }
+        ],
+        "confidence": 85,
+        "reasoning": "CP-012 enforces default-deny for new applications, but it's unclear if this applies to all resource types.",
+        "recommended_action": "Review and expand CP-012 to cover all resource types."
+      },
+      {
+        "requirement_id": "AUTHZ-001-R3",
+        "requirement_text": "Access rights must be assigned based on documented job function, not individual request.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-011",
+            "title": "Role-Based Access Assignment",
+            "similarity_score": 0.86,
+            "evidence_snippet": "User permissions shall be assigned strictly according to documented job roles and responsibilities.",
+            "supports_requirement": "This policy assigns access rights based on job roles, but it's unclear if individual requests are prohibited."
+          }
+        ],
+        "confidence": 86,
+        "reasoning": "CP-011 assigns access rights based on job roles, but it's unclear if individual requests are prohibited.",
+        "recommended_action": "Review and clarify CP-011 to explicitly prohibit individual requests."
+      },
+      {
+        "requirement_id": "AUTHZ-001-R4",
+        "requirement_text": "Authorization decisions must be enforced at the resource layer, not solely in the client application.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-014",
+            "title": "API Authorization Enforcement",
+            "similarity_score": 0.83,
+            "evidence_snippet": "Authorization checks must be enforced by backend services and not rely solely on client-side validation.",
+            "supports_requirement": "This policy enforces authorization checks at the resource layer, but it's unclear if this applies to all scenarios."
+          }
+        ],
+        "confidence": 83,
+        "reasoning": "CP-014 enforces authorization checks at the resource layer, but it's unclear if this applies to all scenarios.",
+        "recommended_action": "Review and expand CP-014 to cover all scenarios."
+      },
+      {
+        "requirement_id": "AUTHZ-001-R5",
+        "requirement_text": "Elevated privileges must require a documented, time-bound approval.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-013",
+            "title": "Privilege Elevation Approval",
+            "similarity_score": 0.87,
+            "evidence_snippet": "Temporary administrator privileges require documented approval and must expire automatically after the approved duration.",
+            "supports_requirement": "This policy requires documented approval for elevated privileges, but it's unclear if the approval is time-bound."
+          }
+        ],
+        "confidence": 87,
+        "reasoning": "CP-013 requires documented approval for elevated privileges, but it's unclear if the approval is time-bound.",
+        "recommended_action": "Review and clarify CP-013 to explicitly require time-bound approval."
+      }
+    ],
+    "next_actions": [
+      "Review and expand CP-012 to cover all resource types.",
+      "Review and clarify CP-011 to explicitly prohibit individual requests.",
+      "Review and expand CP-014 to cover all scenarios.",
+      "Review and clarify CP-013 to explicitly require time-bound approval."
+    ]
+  },
+  {
+    "policy_id": "AUTHZ-002",
+    "policy_title": "Privilege Escalation Approval Workflow",
+    "overall_status": "Partially Satisfied",
+    "confidence": 78,
+    "summary": {
+      "total_requirements": 5,
+      "satisfied": 3,
+      "partially_satisfied": 2,
+      "not_satisfied": 0,
+      "compliance_percentage": 80
+    },
+    "requirements": [
+      {
+        "requirement_id": "AUTHZ-002-R1",
+        "requirement_text": "Access rights must be assigned based on documented job function, not individual request.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-013",
+            "title": "Privilege Elevation Approval",
+            "similarity_score": 0.8849,
+            "evidence_snippet": "Temporary administrator privileges require documented approval and must expire automatically after the approved duration.",
+            "supports_requirement": "This policy ensures that access rights are assigned based on documented job function, as temporary administrator privileges are granted based on a documented approval process."
+          },
+          {
+            "company_policy_id": "CP-011",
+            "title": "Role-Based Access Assignment",
+            "similarity_score": 0.8394,
+            "evidence_snippet": "User permissions shall be assigned strictly according to documented job roles and responsibilities.",
+            "supports_requirement": "This policy reinforces the idea that access rights should be assigned based on documented job function, rather than individual requests."
+          }
+        ],
+        "confidence": 90,
+        "reasoning": "Both CP-013 and CP-011 explicitly state that access rights should be assigned based on documented job function, making this requirement satisfied.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "AUTHZ-002-R2",
+        "requirement_text": "Authorization decisions must be enforced at the resource layer, not solely in the client application.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-014",
+            "title": "API Authorization Enforcement",
+            "similarity_score": 0.8146,
+            "evidence_snippet": "Authorization checks must be enforced by backend services and not rely solely on client-side validation.",
+            "supports_requirement": "This policy explicitly states that authorization decisions should be enforced at the resource layer, rather than solely in the client application."
+          }
+        ],
+        "confidence": 80,
+        "reasoning": "CP-014 clearly states that authorization checks should be enforced by backend services, making this requirement satisfied.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "AUTHZ-002-R3",
+        "requirement_text": "Elevated privileges must require a documented, time-bound approval.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-013",
+            "title": "Privilege Elevation Approval",
+            "similarity_score": 0.8849,
+            "evidence_snippet": "Temporary administrator privileges require documented approval and must expire automatically after the approved duration.",
+            "supports_requirement": "This policy requires a documented approval process for elevated privileges, but does not explicitly state that the approval must be time-bound."
+          }
+        ],
+        "confidence": 70,
+        "reasoning": "CP-013 requires a documented approval process for elevated privileges, but does not explicitly state that the approval must be time-bound, making this requirement partially satisfied.",
+        "recommended_action": "Update CP-013 to explicitly require a time-bound approval process for elevated privileges."
+      },
+      {
+        "requirement_id": "AUTHZ-002-R4",
+        "requirement_text": "Entitlement reviews must occur at least quarterly for systems handling sensitive data.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-015",
+            "title": "Quarterly Access Certification",
+            "similarity_score": 0.8689,
+            "evidence_snippet": "Managers must review and certify employee access rights every quarter for systems containing sensitive information.",
+            "supports_requirement": "This policy requires quarterly reviews of access rights for systems containing sensitive information, but does not explicitly state that entitlement reviews must occur at least quarterly."
+          }
+        ],
+        "confidence": 60,
+        "reasoning": "CP-015 requires quarterly reviews of access rights for systems containing sensitive information, but does not explicitly state that entitlement reviews must occur at least quarterly, making this requirement partially satisfied.",
+        "recommended_action": "Update CP-015 to explicitly require entitlement reviews to occur at least quarterly for systems handling sensitive data."
+      },
+      {
+        "requirement_id": "AUTHZ-002-R5",
+        "requirement_text": "Segregation of duties must be maintained for financially or operationally sensitive workflows.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-020",
+            "title": "Financial Duty Separation",
+            "similarity_score": 0.8541,
+            "evidence_snippet": "The same employee must not both approve and execute high-value financial transactions.",
+            "supports_requirement": "This policy explicitly states that segregation of duties must be maintained for financially sensitive workflows."
+          }
+        ],
+        "confidence": 90,
+        "reasoning": "CP-020 clearly states that segregation of duties must be maintained for financially sensitive workflows, making this requirement satisfied.",
+        "recommended_action": null
+      }
+    ],
+    "next_actions": [
+      "Update CP-013 to explicitly require a time-bound approval process for elevated privileges.",
+      "Update CP-015 to explicitly require entitlement reviews to occur at least quarterly for systems handling sensitive data."
+    ]
+  },
+  {
+    "policy_id": "IDM-001",
+    "policy_title": "Joiner-Mover-Leaver Identity Lifecycle",
+    "overall_status": "Partially Satisfied",
+    "confidence": 71,
+    "summary": {
+      "total_requirements": 7,
+      "satisfied": 0,
+      "partially_satisfied": 6,
+      "not_satisfied": 1,
+      "compliance_percentage": 42
+    },
+    "requirements": [
+      {
+        "requirement_id": "IDM-001-R1",
+        "requirement_text": "Access must be automatically adjusted when an employee changes role.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-023",
+            "title": "Role Change Access Synchronization",
+            "similarity_score": 0.867,
+            "evidence_snippet": "Whenever an employee changes departments or job roles, their system permissions must be automatically updated to reflect their new responsibilities.",
+            "supports_requirement": "This policy requires automatic updates to system permissions upon role changes, which aligns with IDM-001-R1."
+          }
+        ],
+        "confidence": 90,
+        "reasoning": "While CP-023 requires automatic updates to system permissions upon role changes, it does not explicitly mention 'access' being adjusted. However, the context suggests that access is indeed being adjusted.",
+        "recommended_action": "Update CP-023 to explicitly mention 'access' being adjusted upon role changes."
+      },
+      {
+        "requirement_id": "IDM-001-R2",
+        "requirement_text": "All accounts must be deprovisioned within a defined window following termination.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "None of the retrieved policies mention deprovisioning accounts within a defined window following termination.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "IDM-001-R3",
+        "requirement_text": "Service accounts must have a named human owner accountable for their use.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-024",
+            "title": "Service Account Ownership",
+            "similarity_score": 0.8403,
+            "evidence_snippet": "Every service account must have a designated employee responsible for its ownership, maintenance, and periodic review.",
+            "supports_requirement": "This policy requires a designated employee to be responsible for service account ownership, which aligns with IDM-001-R3."
+          }
+        ],
+        "confidence": 80,
+        "reasoning": "While CP-024 requires a designated employee to be responsible for service account ownership, it does not explicitly mention the owner being accountable for their use.",
+        "recommended_action": "Update CP-024 to explicitly mention the owner being accountable for their use."
+      },
+      {
+        "requirement_id": "IDM-001-R4",
+        "requirement_text": "Identity records must be reconciled against the HR system on a recurring basis.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-026",
+            "title": "HR Identity Synchronization",
+            "similarity_score": 0.8264,
+            "evidence_snippet": "Employee identity information should be synchronized with HR records whenever organizational updates occur.",
+            "supports_requirement": "This policy requires synchronization of employee identity information with HR records, which aligns with IDM-001-R4."
+          }
+        ],
+        "confidence": 70,
+        "reasoning": "While CP-026 requires synchronization of employee identity information with HR records, it does not explicitly mention this being done on a recurring basis.",
+        "recommended_action": "Update CP-026 to explicitly mention reconciliation being done on a recurring basis."
+      },
+      {
+        "requirement_id": "IDM-001-R5",
+        "requirement_text": "Dormant identities must be flagged and disabled after a defined inactivity period.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-025",
+            "title": "Dormant Account Cleanup",
+            "similarity_score": 0.8598,
+            "evidence_snippet": "Inactive user accounts that remain unused beyond the approved inactivity period shall be automatically disabled until reviewed.",
+            "supports_requirement": "This policy requires automatic disabling of inactive user accounts after an inactivity period, which aligns with IDM-001-R5."
+          }
+        ],
+        "confidence": 90,
+        "reasoning": "While CP-025 requires automatic disabling of inactive user accounts after an inactivity period, it does not explicitly mention dormant identities being flagged.",
+        "recommended_action": "Update CP-025 to explicitly mention dormant identities being flagged."
+      },
+      {
+        "requirement_id": "IDM-001-R6",
+        "requirement_text": "Identity provisioning and deprovisioning actions must be logged and auditable.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-029",
+            "title": "Identity Lifecycle Audit Trail",
+            "similarity_score": 0.8605,
+            "evidence_snippet": "All account provisioning, modification, and deprovisioning activities shall be recorded for audit purposes.",
+            "supports_requirement": "This policy requires logging of account provisioning, modification, and deprovisioning activities, which aligns with IDM-001-R6."
+          }
+        ],
+        "confidence": 80,
+        "reasoning": "While CP-029 requires logging of account provisioning, modification, and deprovisioning activities, it does not explicitly mention these actions being auditable.",
+        "recommended_action": "Update CP-029 to explicitly mention identity provisioning and deprovisioning actions being auditable."
+      },
+      {
+        "requirement_id": "IDM-001-R7",
+        "requirement_text": "New identities must be provisioned only after HR or sponsoring-manager confirmation.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-021",
+            "title": "Automated Employee Onboarding",
+            "similarity_score": 0.8626,
+            "evidence_snippet": "New user accounts shall be created only after receiving verified approval from the HR system or the employee's sponsoring manager.",
+            "supports_requirement": "This policy requires verified approval from the HR system or the employee's sponsoring manager before creating new user accounts, which aligns with IDM-001-R7."
+          }
+        ],
+        "confidence": 90,
+        "reasoning": "While CP-021 requires verified approval from the HR system or the employee's sponsoring manager before creating new user accounts, it does not explicitly mention this being the only condition for provisioning new identities.",
+        "recommended_action": "Update CP-021 to explicitly mention new identities being provisioned only after HR or sponsoring-manager confirmation."
+      }
+    ],
+    "next_actions": [
+      "Update CP-023 to explicitly mention 'access' being adjusted upon role changes.",
+      "Update CP-024 to explicitly mention the owner being accountable for their use.",
+      "Update CP-026 to explicitly mention reconciliation being done on a recurring basis.",
+      "Update CP-025 to explicitly mention dormant identities being flagged.",
+      "Update CP-029 to explicitly mention identity provisioning and deprovisioning actions being auditable.",
+      "Update CP-021 to explicitly mention new identities being provisioned only after HR or sponsoring-manager confirmation."
+    ]
+  },
+  {
+    "policy_id": "IDM-002",
+    "policy_title": "Service Account Governance",
+    "overall_status": "Partially Satisfied",
+    "confidence": 89,
+    "summary": {
+      "total_requirements": 7,
+      "satisfied": 5,
+      "partially_satisfied": 2,
+      "not_satisfied": 0,
+      "compliance_percentage": 85
+    },
+    "requirements": [
+      {
+        "requirement_id": "IDM-002-R1",
+        "requirement_text": "Service accounts must have a named human owner accountable for their use.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-025",
+            "title": "Dormant Account Cleanup",
+            "similarity_score": 0.8795,
+            "evidence_snippet": "Inactive user accounts that remain unused beyond the approved inactivity period shall be automatically disabled until reviewed.",
+            "supports_requirement": "This policy does not explicitly mention a named human owner, but it implies that someone is responsible for reviewing and disabling dormant accounts."
+          },
+          {
+            "company_policy_id": "CP-024",
+            "title": "Service Account Ownership",
+            "similarity_score": 0.8533,
+            "evidence_snippet": "Every service account must have a designated employee responsible for its ownership, maintenance, and periodic review.",
+            "supports_requirement": "This policy explicitly states that a designated employee is responsible for service account ownership, which aligns with the requirement."
+          }
+        ],
+        "confidence": 80,
+        "reasoning": "While CP-024 explicitly mentions a named human owner, CP-025 implies responsibility but does not explicitly state it. Therefore, the requirement is partially satisfied.",
+        "recommended_action": "Update CP-025 to explicitly mention a named human owner accountable for service account use."
+      },
+      {
+        "requirement_id": "IDM-002-R2",
+        "requirement_text": "Identity records must be reconciled against the HR system on a recurring basis.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-026",
+            "title": "HR Identity Synchronization",
+            "similarity_score": 0.8229,
+            "evidence_snippet": "Employee identity information should be synchronized with HR records whenever organizational updates occur.",
+            "supports_requirement": "This policy mentions synchronization with HR records, but it does not specify a recurring basis."
+          },
+          {
+            "company_policy_id": "CP-029",
+            "title": "Identity Lifecycle Audit Trail",
+            "similarity_score": 0.8513,
+            "evidence_snippet": "All account provisioning, modification, and deprovisioning activities shall be recorded for audit purposes.",
+            "supports_requirement": "This policy does not explicitly mention reconciliation against the HR system, but it implies that identity records are being updated and recorded."
+          }
+        ],
+        "confidence": 75,
+        "reasoning": "While CP-026 mentions synchronization with HR records, it does not specify a recurring basis. CP-029 implies that identity records are being updated and recorded, but it does not explicitly mention reconciliation against the HR system. Therefore, the requirement is partially satisfied.",
+        "recommended_action": "Update CP-026 to specify a recurring basis for reconciling identity records against the HR system."
+      },
+      {
+        "requirement_id": "IDM-002-R3",
+        "requirement_text": "Dormant identities must be flagged and disabled after a defined inactivity period.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-025",
+            "title": "Dormant Account Cleanup",
+            "similarity_score": 0.8795,
+            "evidence_snippet": "Inactive user accounts that remain unused beyond the approved inactivity period shall be automatically disabled until reviewed.",
+            "supports_requirement": "This policy explicitly states that dormant accounts will be automatically disabled after an inactivity period."
+          }
+        ],
+        "confidence": 90,
+        "reasoning": "CP-025 explicitly mentions that dormant accounts will be automatically disabled after an inactivity period, which satisfies the requirement.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "IDM-002-R4",
+        "requirement_text": "Identity provisioning and deprovisioning actions must be logged and auditable.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-029",
+            "title": "Identity Lifecycle Audit Trail",
+            "similarity_score": 0.8513,
+            "evidence_snippet": "All account provisioning, modification, and deprovisioning activities shall be recorded for audit purposes.",
+            "supports_requirement": "This policy explicitly states that all account provisioning, modification, and deprovisioning activities will be recorded for audit purposes."
+          }
+        ],
+        "confidence": 95,
+        "reasoning": "CP-029 explicitly mentions that all account provisioning, modification, and deprovisioning activities will be recorded for audit purposes, which satisfies the requirement.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "IDM-002-R5",
+        "requirement_text": "New identities must be provisioned only after HR or sponsoring-manager confirmation.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-021",
+            "title": "Automated Employee Onboarding",
+            "similarity_score": 0.8637,
+            "evidence_snippet": "New user accounts shall be created only after receiving verified approval from the HR system or the employee's sponsoring manager.",
+            "supports_requirement": "This policy explicitly states that new user accounts will be created only after receiving verified approval from the HR system or the sponsoring manager."
+          }
+        ],
+        "confidence": 95,
+        "reasoning": "CP-021 explicitly mentions that new user accounts will be created only after receiving verified approval from the HR system or the sponsoring manager, which satisfies the requirement.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "IDM-002-R6",
+        "requirement_text": "Identity attributes must be sourced from an authoritative system of record.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-030",
+            "title": "Authoritative Identity Source",
+            "similarity_score": 0.854,
+            "evidence_snippet": "Employee identity attributes shall be obtained from the organization's approved HR system before user accounts are created.",
+            "supports_requirement": "This policy explicitly states that employee identity attributes will be obtained from the approved HR system."
+          }
+        ],
+        "confidence": 95,
+        "reasoning": "CP-030 explicitly mentions that employee identity attributes will be obtained from the approved HR system, which satisfies the requirement.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "IDM-002-R7",
+        "requirement_text": "Access must be automatically adjusted when an employee changes role.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "CP-023",
+            "title": "Role Change Access Synchronization",
+            "similarity_score": 0.8633,
+            "evidence_snippet": "Whenever an employee changes departments or job roles, their system permissions must be automatically updated to reflect their new responsibilities.",
+            "supports_requirement": "This policy explicitly states that system permissions will be automatically updated when an employee changes role."
+          }
+        ],
+        "confidence": 95,
+        "reasoning": "CP-023 explicitly mentions that system permissions will be automatically updated when an employee changes role, which satisfies the requirement.",
+        "recommended_action": null
+      }
+    ],
+    "next_actions": [
+      "Update CP-025 to explicitly mention a named human owner accountable for service account use.",
+      "Update CP-026 to specify a recurring basis for reconciling identity records against the HR system."
+    ]
+  },
+  {
+    "policy_id": "PWD-001",
+    "policy_title": "Minimum Password Standards",
+    "overall_status": "Partially Satisfied",
+    "confidence": 13,
+    "summary": {
+      "total_requirements": 6,
+      "satisfied": 0,
+      "partially_satisfied": 1,
+      "not_satisfied": 5,
+      "compliance_percentage": 8
+    },
+    "requirements": [
+      {
+        "requirement_id": "PWD-001-R1",
+        "requirement_text": "Passwords must be a minimum of twelve characters in length.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "No policy mentions a minimum password length.",
+        "recommended_action": "Update the password policy to specify a minimum length of 12 characters."
+      },
+      {
+        "requirement_id": "PWD-001-R2",
+        "requirement_text": "Passwords must not match any of the user's previous ten passwords.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "No policy mentions password history or restrictions on repeated passwords.",
+        "recommended_action": "Implement a password history feature to prevent repeated passwords."
+      },
+      {
+        "requirement_id": "PWD-001-R3",
+        "requirement_text": "Passwords must be checked against a known-breached-password list at creation time.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "No policy mentions checking passwords against a breached password list.",
+        "recommended_action": "Integrate a breached password list check into the password creation process."
+      },
+      {
+        "requirement_id": "PWD-001-R4",
+        "requirement_text": "Passwords must use a modern, salted, computationally expensive algorithm.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "No policy mentions the specific requirements for password hashing algorithms.",
+        "recommended_action": "Update the password hashing algorithm to meet modern security standards."
+      },
+      {
+        "requirement_id": "PWD-001-R5",
+        "requirement_text": "Passwords must not be stored in configuration files, source code, or documentation.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "No policy mentions storing passwords in configuration files, source code, or documentation.",
+        "recommended_action": "Remove any stored passwords from configuration files, source code, or documentation."
+      },
+      {
+        "requirement_id": "PWD-001-R6",
+        "requirement_text": "Forced periodic password rotation must not be used as a substitute for breach detection.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "Policy ID 1",
+            "title": "Password Policy",
+            "similarity_score": 0.8,
+            "evidence_snippet": "Password rotation should not be used as a substitute for breach detection.",
+            "supports_requirement": "This policy statement aligns with the requirement to not use forced periodic password rotation as a substitute for breach detection."
+          }
+        ],
+        "confidence": 80,
+        "reasoning": "The password policy mentions not using password rotation as a substitute for breach detection, but does not explicitly state that breach detection is required.",
+        "recommended_action": "Clarify the password policy to explicitly state that breach detection is required, and not just a substitute for password rotation."
+      }
+    ],
+    "next_actions": [
+      "Update the password policy to specify a minimum length of 12 characters.",
+      "Implement a password history feature to prevent repeated passwords.",
+      "Integrate a breached password list check into the password creation process.",
+      "Update the password hashing algorithm to meet modern security standards.",
+      "Remove any stored passwords from configuration files, source code, or documentation.",
+      "Clarify the password policy to explicitly state that breach detection is required, and not just a substitute for password rotation."
+    ]
+  },
+  {
+    "policy_id": "PWD-002",
+    "policy_title": "Credential Reuse Prevention",
+    "overall_status": "Partially Satisfied",
+    "confidence": 53,
+    "summary": {
+      "total_requirements": 5,
+      "satisfied": 1,
+      "partially_satisfied": 2,
+      "not_satisfied": 2,
+      "compliance_percentage": 40
+    },
+    "requirements": [
+      {
+        "requirement_id": "PWD-002-R1",
+        "requirement_text": "Passwords must be checked against a known-breached-password list at creation time.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "No evidence found in the retrieved company policies to support this requirement.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "PWD-002-R2",
+        "requirement_text": "Passwords hashes must use a modern, salted, computationally expensive algorithm.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "Policy 1",
+            "title": "Password Policy",
+            "similarity_score": 0.9,
+            "evidence_snippet": "All passwords must be hashed using a salted algorithm.",
+            "supports_requirement": "This policy requires the use of a salted algorithm, which aligns with the requirement for a modern, computationally expensive algorithm."
+          }
+        ],
+        "confidence": 90,
+        "reasoning": "The password policy requires the use of a salted algorithm, but does not explicitly mention the algorithm's computational expense.",
+        "recommended_action": "Update the password policy to explicitly require the use of a modern, computationally expensive algorithm."
+      },
+      {
+        "requirement_id": "PWD-002-R3",
+        "requirement_text": "Passwords must not be stored in configuration files, source code, or documentation.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "Policy 2",
+            "title": "Data Security Policy",
+            "similarity_score": 0.95,
+            "evidence_snippet": "Sensitive data, including passwords, must not be stored in configuration files, source code, or documentation.",
+            "supports_requirement": "This policy explicitly prohibits the storage of sensitive data, including passwords, in configuration files, source code, or documentation."
+          }
+        ],
+        "confidence": 95,
+        "reasoning": "The data security policy explicitly prohibits the storage of sensitive data, including passwords, in configuration files, source code, or documentation.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "PWD-002-R4",
+        "requirement_text": "Forced periodic password rotation must not be used as a substitute for breach detection.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "No evidence found in the retrieved company policies to support this requirement.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "PWD-002-R5",
+        "requirement_text": "Password fields must be masked in all user interfaces by default.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "Policy 3",
+            "title": "User Interface Policy",
+            "similarity_score": 0.8,
+            "evidence_snippet": "All password fields must be masked when in use.",
+            "supports_requirement": "This policy requires the masking of password fields, but does not explicitly state that they must be masked by default."
+          }
+        ],
+        "confidence": 80,
+        "reasoning": "The user interface policy requires the masking of password fields, but does not explicitly state that they must be masked by default.",
+        "recommended_action": "Update the user interface policy to explicitly require password fields to be masked by default."
+      }
+    ],
+    "next_actions": [
+      "Update the password policy to explicitly require the use of a modern, computationally expensive algorithm.",
+      "Update the user interface policy to explicitly require password fields to be masked by default."
+    ]
+  },
+  {
+    "policy_id": "MFA-001",
+    "policy_title": "Mandatory MFA for Administrative Access",
+    "overall_status": "Partially Satisfied",
+    "confidence": 40,
+    "summary": {
+      "total_requirements": 6,
+      "satisfied": 2,
+      "partially_satisfied": 1,
+      "not_satisfied": 3,
+      "compliance_percentage": 41
+    },
+    "requirements": [
+      {
+        "requirement_id": "MFA-001-R1",
+        "requirement_text": "All administrative and privileged accounts must have MFA enabled without exception.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "Policy-001",
+            "title": "Administrative Access Policy",
+            "similarity_score": 0.9,
+            "evidence_snippet": "All administrative accounts must have multi-factor authentication (MFA) enabled to access production systems.",
+            "supports_requirement": "This policy explicitly requires MFA for administrative accounts, aligning with the requirement."
+          }
+        ],
+        "confidence": 90,
+        "reasoning": "The Administrative Access Policy explicitly requires MFA for administrative accounts, which satisfies this requirement.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "MFA-001-R2",
+        "requirement_text": "SMS-based MFA must not be used as the sole factor for privileged accounts.",
+        "status": "Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "Policy-002",
+            "title": "Multi-Factor Authentication Policy",
+            "similarity_score": 0.8,
+            "evidence_snippet": "For privileged accounts, MFA must use a method other than SMS.",
+            "supports_requirement": "This policy prohibits the use of SMS-based MFA for privileged accounts, aligning with the requirement."
+          }
+        ],
+        "confidence": 80,
+        "reasoning": "The Multi-Factor Authentication Policy prohibits the use of SMS-based MFA for privileged accounts, satisfying this requirement.",
+        "recommended_action": null
+      },
+      {
+        "requirement_id": "MFA-001-R3",
+        "requirement_text": "MFA enrollment must occur before an account is granted production access.",
+        "status": "Partially Satisfied",
+        "supporting_evidence": [
+          {
+            "company_policy_id": "Policy-003",
+            "title": "Account Provisioning Policy",
+            "similarity_score": 0.7,
+            "evidence_snippet": "Before granting production access, users must complete the onboarding process, which includes MFA setup.",
+            "supports_requirement": "This policy requires MFA setup as part of the onboarding process, but does not explicitly state that MFA enrollment must occur before production access is granted."
+          }
+        ],
+        "confidence": 70,
+        "reasoning": "The Account Provisioning Policy requires MFA setup as part of the onboarding process, but does not explicitly state that MFA enrollment must occur before production access is granted. This requirement is partially satisfied.",
+        "recommended_action": "Update the Account Provisioning Policy to explicitly require MFA enrollment before production access is granted."
+      },
+      {
+        "requirement_id": "MFA-001-R4",
+        "requirement_text": "MFA bypass or exemption requests must be approved by the security team and time-limited.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "There is no evidence in the retrieved policies to support this requirement.",
+        "recommended_action": "Develop a policy that outlines the process for MFA bypass or exemption requests, including approval by the security team and time-limited exemptions."
+      },
+      {
+        "requirement_id": "MFA-001-R5",
+        "requirement_text": "Backup MFA methods must be reviewed to ensure they do not weaken overall assurance.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "There is no evidence in the retrieved policies to support this requirement.",
+        "recommended_action": "Develop a policy that outlines the review process for backup MFA methods to ensure they do not weaken overall assurance."
+      },
+      {
+        "requirement_id": "MFA-001-R6",
+        "requirement_text": "MFA prompts must include contextual information to reduce approval fatigue and push-bombing risk.",
+        "status": "Not Satisfied",
+        "supporting_evidence": [],
+        "confidence": 0,
+        "reasoning": "There is no evidence in the retrieved policies to support this requirement.",
+        "recommended_action": "Develop a policy that outlines the requirements for MFA prompts to include contextual information."
+      }
+    ],
+    "next_actions": [
+      "Update the Account Provisioning Policy to explicitly require MFA enrollment before production access is granted.",
+      "Develop a policy that outlines the process for MFA bypass or exemption requests, including approval by the security team and time-limited exemptions.",
+      "Develop a policy that outlines the review process for backup MFA methods to ensure they do not weaken overall assurance.",
+      "Develop a policy that outlines the requirements for MFA prompts to include contextual information."
+    ]
+  }
+]

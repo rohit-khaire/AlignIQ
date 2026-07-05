@@ -267,6 +267,7 @@ async def trigger_deep_audit(request: DeepAuditRequest):
         raise HTTPException(status_code=500, detail=f"Deep Audit failed: {str(e)}")
 
 @router.post("/reset")
+@router.get("/reset")
 async def reset_session():
     """Deletes temporary uploaded files and generated reports to save space on cloud deployments."""
     logger.info("Resetting session, deleting temporary files...")

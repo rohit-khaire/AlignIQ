@@ -4,7 +4,7 @@ import logging
 import shutil
 from fastapi import APIRouter, UploadFile, File, HTTPException, Query, Response
 from models.responses import ComplianceReportResponse
-from services.compliance_engine import ingest_company_policies, run_compliance_analysis
+from services.compliance_engine import ingest_company_policies, run_compliance_analysis, clear_pinecone_db
 from services.export_service import generate_export
 
 logger = logging.getLogger(__name__)
@@ -266,8 +266,9 @@ async def trigger_deep_audit(request: DeepAuditRequest):
         logger.error(f"Deep Audit failed: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Deep Audit failed: {str(e)}")
 
-@router.post("/reset")
-@router.get("/reset")
+# @router.post("/reset")
+# @router.get("/reset")
+@router.api_route("/reset", methods=["GET", "POST"])
 async def reset_session():
     """Deletes temporary uploaded files and generated reports to save space on cloud deployments."""
     logger.info("Resetting session, deleting temporary files...")
@@ -290,4 +291,7 @@ async def reset_session():
         except Exception as e:
             logger.error(f"Failed to delete {file_path}: {e}")
             
-    return {"status": "success", "message": f"Deleted {deleted_count} temporary files."}
+    # Clear vector database
+    clear_pinecone_db()
+            
+    return {"status": "success", "message": f"Deleted {deleted_count} temporary files and cleared Pinecone VectorDB."}

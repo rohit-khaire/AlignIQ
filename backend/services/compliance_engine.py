@@ -30,6 +30,15 @@ def get_vectorstore():
     )
     return vectorstore
 
+def clear_pinecone_db():
+    logger.info("Clearing Pinecone VectorDB...")
+    try:
+        pc = Pinecone(api_key=pinecone_api_key)
+        index = pc.Index("company-policies")
+        index.delete(delete_all=True)
+        logger.info("Successfully cleared Pinecone VectorDB.")
+    except Exception as e:
+        logger.error(f"Failed to clear Pinecone VectorDB: {e}")
 def ingest_company_policies(file_path: str):
     logger.info(f"Starting ingestion from {file_path}")
     

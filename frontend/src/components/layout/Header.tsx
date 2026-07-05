@@ -1,6 +1,7 @@
 import React from 'react';
 import { Moon, Bell } from 'lucide-react';
 import { FiGithub } from 'react-icons/fi';
+import { UserButton } from '@clerk/clerk-react';
 
 export const Header: React.FC = () => {
   return (
@@ -28,8 +29,14 @@ export const Header: React.FC = () => {
           <FiGithub className="w-5 h-5" />
         </a>
 
-        <div className="ml-4 w-9 h-9 rounded-full bg-gradient-to-br from-zinc-700 to-zinc-900 border border-white/10 flex items-center justify-center overflow-hidden">
-          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=transparent" alt="User" className="w-full h-full object-cover" />
+        <div className="ml-4 flex items-center justify-center">
+          <UserButton 
+            appearance={{
+              elements: {
+                userButtonAvatarBox: "w-9 h-9 border border-white/10 shadow-lg"
+              }
+            }}
+          />
         </div>
       </div>
     </header>

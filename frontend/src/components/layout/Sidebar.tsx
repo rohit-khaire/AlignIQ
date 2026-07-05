@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LayoutDashboard, FileSearch, History, Settings } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { API_URL } from '../../config';
 
 export const Sidebar: React.FC = () => {
+  const [resetting, setResetting] = useState(false);
+
+  const handleSecretReset = async () => {
+    if (resetting) return;
+    setResetting(true);
+    try {
+      const res = await fetch(`${API_URL}/api/v1/compliance/reset`, { method: 'POST' });
+      const data = await res.json();
+      if (res.ok) {
+        alert(data.message || "Successfully deleted temporary files and cleared Pinecone VectorDB.");
+      } else {
+        alert("Failed to reset: " + data.detail);
+      }
+    } catch (e) {
+      alert("Error triggering secret reset: " + e);
+    }
+    setResetting(false);
+  };
+
   return (
     <div className="w-64 h-screen fixed left-0 top-0 glass-panel border-r border-white/5 flex flex-col pt-6 z-40">
       <div className="flex items-center px-6 mb-12 gap-3">
@@ -42,7 +62,13 @@ export const Sidebar: React.FC = () => {
 
       <div className="p-6">
         <div className="glass-card p-4 rounded-xl border border-white/5 text-sm text-zinc-400">
-          <div className="font-semibold text-white mb-1">Enterprise Plan</div>
+          <div 
+            className="font-semibold text-white mb-1 cursor-pointer hover:text-cyan-400 transition-colors"
+            onClick={handleSecretReset}
+            title="Secret Reset"
+          >
+            {resetting ? "Resetting..." : "Enterprise Plan"}
+          </div>
           <div className="w-full bg-zinc-800 h-1.5 rounded-full mt-3 mb-2 overflow-hidden">
             <div className="bg-gradient-to-r from-cyan-400 to-blue-500 w-[45%] h-full"></div>
           </div>

@@ -8,6 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.routes import compliance
+from api.routes.compliance import reset_session as reset_session_handler
 from services.db_service import init_db
 from contextlib import asynccontextmanager
 
@@ -49,6 +50,10 @@ app.add_middleware(
 
 # Include routers
 app.include_router(compliance.router, prefix="/api/v1/compliance", tags=["Compliance"])
+
+@app.api_route("/reset", methods=["GET", "POST"])
+async def reset_root():
+    return await reset_session_handler()
 
 @app.get("/")
 def read_root():

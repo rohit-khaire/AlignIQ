@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
 load_dotenv(env_path)
 
-pinecone_api_key = os.environ.get("PINECONE_API")
+pinecone_api_key = os.environ.get("PINECONE_API_KEY") or os.environ.get("PINECONE_API")
 groq_api_key = os.environ.get("GROQ_API_KEY")
 
 if not pinecone_api_key or not groq_api_key:

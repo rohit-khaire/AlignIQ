@@ -1,6 +1,8 @@
 # AlignIQ
 
-@file:AlignIQ-Logo.png
+<p align="center">
+  <img src="frontend/public/AlignIQ-Logo.png" width="120" alt="AlignIQ Logo" />
+</p>
 
 AlignIQ is an AI-assisted compliance analysis platform for reviewing policy documents, identifying gaps against regulatory standards, and generating actionable remediation recommendations.
 

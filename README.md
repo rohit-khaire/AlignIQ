@@ -1,242 +1,176 @@
 # AlignIQ
 
-**See compliance with clarity. Intelligent policy alignment.**
+@file:AlignIQ-Logo.png
 
-AlignIQ is an intelligent compliance management platform that helps organizations align their policies with compliance requirements, extract insights from policy documents, and generate comprehensive compliance reports.
+AlignIQ is an AI-assisted compliance analysis platform for reviewing policy documents, identifying gaps against regulatory standards, and generating actionable remediation recommendations.
 
-## 📋 Table of Contents
+The system combines a FastAPI backend with a React + TypeScript frontend so you can upload a policy PDF, run compliance analysis, inspect the results, and explore autofix and chat-based guidance in one experience.
 
-- [Overview](#overview)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Contributing](#contributing)
+## What the project does
 
-## 🎯 Overview
+- Uploads policy documents in PDF format
+- Extracts content from the document and structures it for analysis
+- Compares policy sections against a master policy dataset
+- Produces a compliance report with findings and recommendations
+- Supports autofix suggestions, exportable reports, and a chat-style compliance assistant
+- Stores basic historical compliance score data locally for dashboard views
 
-AlignIQ streamlines compliance management by:
-- Extracting text from policy documents (PDF support)
-- Analyzing policy compliance against regulatory requirements
-- Generating detailed compliance reports
-- Exporting compliance data in multiple formats
-- Providing intelligent policy alignment recommendations
+## Project structure
 
-## ✨ Features
-
-- **PDF Text Extraction** - Extract and process compliance documents
-- **Compliance Engine** - Intelligent analysis of policy alignment
-- **Report Generation** - Generate structured compliance reports
-- **Multi-format Export** - Export data to JSON, CSV, and other formats
-- **RESTful API** - Easy-to-use API endpoints for integration
-- **React Frontend** - Intuitive user interface for compliance management
-
-## 📁 Project Structure
-
-```
+```text
 AlignIQ/
 ├── backend/
 │   ├── api/
-│   │   ├── main.py              # FastAPI application entry point
-│   │   └── routes/
-│   │       └── compliance.py     # Compliance API endpoints
+│   │   └── main.py
+│   ├── api/routes/compliance.py
 │   ├── services/
-│   │   ├── compliance_engine.py  # Core compliance analysis logic
-│   │   ├── pdf_extractor.py      # PDF text extraction
-│   │   └── export_service.py     # Report export functionality
-│   ├── models/
-│   │   └── responses.py          # Pydantic response models
+│   │   ├── compliance_engine.py
+│   │   ├── pdf_extractor.py
+│   │   ├── autofix_engine.py
+│   │   ├── chatbot_engine.py
+│   │   └── export_service.py
 │   ├── data/
-│   │   ├── master_policies.json  # Policy database
+│   │   ├── master_policies.json
 │   │   └── Enterprise_Compliance_Manual_Fictional_Demo.md
-│   ├── extract-text/             # Text extraction utilities
-│   ├── store-to-db/              # Database operations
-│   ├── uploads/                  # User uploaded files
-│   ├── user_uploaded_data/       # Processed user data
-│   ├── reports/                  # Generated reports
-│   └── requirements.txt          # Python dependencies
+│   ├── uploads/
+│   ├── reports/
+│   ├── requirements.txt
+│   └── .env.example
 ├── frontend/
-│   └── .oxlintrc.json            # Linting configuration
-└── README.md                      # This file
+│   ├── package.json
+│   ├── src/
+│   └── vite.config.ts
+└── README.md
 ```
 
-## 🛠 Tech Stack
+## Tech stack
 
-**Backend:**
-- Python 3.x
-- FastAPI - Web framework
-- Pydantic - Data validation
-- PyPDF / Pymupdf4llm PDF extraction libraries
+- Backend: Python, FastAPI, Pydantic, Uvicorn
+- Frontend: React, TypeScript, Vite, Tailwind-inspired UI components
+- AI integrations: Groq and Pinecone-based services for extraction, analysis, and reasoning
+- Data storage: SQLite for historical compliance score logs
 
-**Frontend:**
-- React
-- TypeScript
-- Oxlint - Code linting
+## Prerequisites
 
-## 🚀 Getting Started
+Make sure these are installed on your machine:
 
-### Prerequisites
-- Python 3.8+
-- Node.js 14+
+- Python 3.10+
+- Node.js 18+
+- npm 9+
 - Git
 
-### Backend Setup
+## Local development setup
 
-1. Clone the repository:
+### 1. Clone the repository
+
 ```bash
 git clone https://github.com/rohit-khaire/AlignIQ.git
-cd AlignIQ/backend
+cd AlignIQ
 ```
 
-2. Create a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+### 2. Set up the backend
 
-3. Install dependencies:
 ```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
+cp .env.example .env
 ```
 
-4. Run the API server:
-```bash
-python -m uvicorn api.main:app --host 127.0.0.1 --port 8000 --reload
+Open the new `.env` file and fill in the required values:
+
+```env
+PINECONE_API=your_pinecone_api_key
+PINECONE_HOST=your_pinecone_host
+PINECONE_INDEX=company-policies
+GROQ_API_KEY=your_groq_api_key
 ```
 
-The API will be available at `http://127.0.0.1:8000`
+> The backend can start without these values, but the AI-driven analysis features will fail until the credentials are configured correctly.
 
-### Frontend Setup
+Start the API server:
 
-1. Navigate to frontend directory:
 ```bash
-cd ../frontend
+uvicorn api.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-2. Install dependencies:
+The backend will be available at:
+
+- http://127.0.0.1:8000
+- http://localhost:8000
+
+### 3. Set up the frontend
+
+Open a second terminal:
+
 ```bash
+cd frontend
 npm install
-```
-
-3. Start development server:
-```bash
 npm run dev
 ```
 
-## 📖 Usage
+The frontend will be available at:
 
-### API Endpoints
+- http://localhost:5173
 
-Base URL: `http://127.0.0.1:8000`
+If your backend is running somewhere else, you can override the API URL:
 
-#### 1. Welcome Endpoint
-```
-GET /
-```
-**Response:**
-```json
-{
-  "message": "Welcome to the AlignIQ Compliance API"
-}
+```bash
+VITE_API_URL=http://127.0.0.1:8000 npm run dev
 ```
 
-#### 2. Analyze Compliance (Upload PDF Policy)
-```
-POST /api/v1/compliance/analyze
-Content-Type: multipart/form-data
+## Typical local workflow
 
-Body:
-  file: <your-policy-document.pdf>
-```
-**Response:**
-```json
-{
-  "status": "success",
-  "report": [
-    {
-      "policy_section": "...",
-      "compliance_status": "...",
-      "findings": [...],
-      "recommendations": [...]
-    }
-  ]
-}
-```
-**Status Codes:**
-- `200` - Analysis completed successfully
-- `400` - Invalid file format (only PDF supported)
-- `500` - Server error during analysis
+1. Start the backend.
+2. Start the frontend.
+3. Open the frontend in your browser.
+4. Upload a PDF policy document.
+5. Wait for the compliance analysis to finish.
+6. Review the report, try autofix suggestions, and use the chat assistant for follow-up questions.
 
-#### 3. Export Compliance Report
-```
-GET /api/v1/compliance/export?format=json
-```
-**Query Parameters:**
-- `format` (required): Export format - `json`, `csv`, or `pdf`
+## Main API endpoints
 
-**Response:**
-- Returns the compliance report file in the requested format
-- File is automatically downloaded as an attachment
+Base URL: http://127.0.0.1:8000
 
-**Status Codes:**
-- `200` - Export successful
-- `400` - Invalid format specified
-- `404` - No compliance report found
-- `500` - Server error during export
+- GET `/` - Health/welcome endpoint
+- POST `/api/v1/compliance/analyze` - Upload a policy PDF and run analysis
+- GET `/api/v1/compliance/export` - Export the latest report as JSON, CSV, or PDF
+- POST `/api/v1/compliance/autofix` - Trigger remediation suggestions
+- POST `/api/v1/compliance/chat` - Ask the compliance assistant a question
+- GET `/api/v1/compliance/history` - Retrieve historical compliance score data
+- POST `/api/v1/compliance/reset` - Clear temporary uploaded files and generated reports
 
-### Example Usage with cURL
+Example upload with curl:
 
-**Upload and Analyze:**
 ```bash
 curl -X POST "http://127.0.0.1:8000/api/v1/compliance/analyze" \
   -H "accept: application/json" \
-  -F "file=@policy.pdf"
+  -F "file=@/path/to/policy.pdf"
 ```
 
-**Export Report as JSON:**
-```bash
-curl -X GET "http://127.0.0.1:8000/api/v1/compliance/export?format=json" \
-  -o compliance_report.json
-```
+## Troubleshooting
 
-**Export Report as CSV:**
-```bash
-curl -X GET "http://127.0.0.1:8000/api/v1/compliance/export?format=csv" \
-  -o compliance_report.csv
-```
+- If the frontend cannot reach the backend, confirm that the backend is running and that the API URL points to port 8000.
+- If analysis fails, verify your Groq and Pinecone environment variables in the backend `.env` file.
+- If Python dependencies fail to install, make sure your virtual environment is active and that you are using a compatible Python version.
 
-### Frontend Integration
+## Notes
 
-Frontend available at: `http://localhost:5173` (after `npm run dev`)
+- Generated reports are written to the backend `reports` directory.
+- Uploaded files are stored under the backend `uploads` directory.
+- Local historical score logs are stored in the backend `data/compliance_history.db` SQLite database.
 
-CORS is configured to allow requests from both `http://localhost:5173` and `http://127.0.0.1:5173`
+## Contributing
 
-## 🔧 Configuration
+1. Create a feature branch.
+2. Make your changes.
+3. Test locally.
+4. Open a pull request with a clear summary of the update.
 
-- **Policy Database**: Update `backend/data/master_policies.json`
-- **Compliance Rules**: Modify `backend/services/compliance_engine.py`
-- **Frontend Linting**: Edit `frontend/.oxlintrc.json`
-
-## 📝 Contributing
-
-1. Create a feature branch: `git checkout -b feature/your-feature`
-2. Commit changes: `git commit -m "Add your feature"`
-3. Push to branch: `git push origin feature/your-feature`
-4. Open a Pull Request
-
-## 📧 Support
-
-For issues, questions, or suggestions, please open an issue on GitHub.
-
-## 👤 Author
+## Author
 
 **Rohit Khaire**
 
-- GitHub: [@rohit-khaire](https://github.com/rohit-khaire)
-- Repository: [AlignIQ](https://github.com/rohit-khaire/AlignIQ)
+GitHub: https://github.com/rohit-khaire
 
----
-
-*Built with ❤️ for compliance management excellence*

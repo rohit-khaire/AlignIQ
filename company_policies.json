@@ -1,0 +1,329 @@
+{
+  "company_name": "Rohit's Digital Solutions Pvt. Ltd.",
+  "document_title": "Internal Information Security Policy Handbook",
+  "version": "1.0",
+  "effective_date": "2026-01-10",
+  "total_policies": 40,
+  "policies": [
+    {
+      "company_policy_id": "CP-001",
+      "title": "EPA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "IT",
+      "status": "Active",
+      "policy_text": "We accurately measure and report 100% of our Scope 1 and 2 emissions from all domestic and international compute clusters to the EPA, explicitly ensuring no workloads are hidden."
+    },
+    {
+      "company_policy_id": "CP-002",
+      "title": "FinCEN Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "HR automatically updates the employee's tax withholding state if they log in from a new state for more than 30 consecutive days via our geolocation tracking tool."
+    },
+    {
+      "company_policy_id": "CP-003",
+      "title": "FTC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "User data is never sold to third parties unless the user explicitly checks the opt-in box during registration. The core app functionality remains 100% accessible for users who decline."
+    },
+    {
+      "company_policy_id": "CP-004",
+      "title": "SEC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "Our incident response playbook requires the CISO to immediately notify the SEC via Form 8-K within 48 hours of confirming any unauthorized access to our production databases."
+    },
+    {
+      "company_policy_id": "CP-005",
+      "title": "DOJ Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "All vendor contracts are limited to a maximum of 2 years. Any contract renewal requires a mandatory competitive bidding process involving at least three external vendors."
+    },
+    {
+      "company_policy_id": "CP-006",
+      "title": "OSHA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "HR",
+      "status": "Active",
+      "policy_text": "Warehouse employees are required to take a 15-minute paid break every 4 hours, and all emergency exits are physically inspected daily to ensure zero obstructions."
+    },
+    {
+      "company_policy_id": "CP-007",
+      "title": "HIPAA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "All patient healthcare records are encrypted using AES-256 at rest and TLS 1.3 in transit. We maintain a strict zero-sharing policy for PHI with any marketing or advertising entities."
+    },
+    {
+      "company_policy_id": "CP-008",
+      "title": "FCC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Engineering",
+      "status": "Active",
+      "policy_text": "Our network routing algorithms are completely agnostic to the source and destination of packets, ensuring our own streaming services receive the exact same priority as competitor traffic."
+    },
+    {
+      "company_policy_id": "CP-009",
+      "title": "DOE Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "Our primary datacenters operate at a highly efficient 1.2 PUE and have direct physical grid connections to local wind farms that supply 45% of our total power consumption."
+    },
+    {
+      "company_policy_id": "CP-010",
+      "title": "EPA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "We report our Scope 1 emissions accurately, but we are currently evaluating how to measure our Scope 2 emissions across our subsidiary offices."
+    },
+    {
+      "company_policy_id": "CP-011",
+      "title": "FinCEN Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "IT",
+      "status": "Active",
+      "policy_text": "We ask employees to voluntarily update their address in Workday if they move. We do not currently enforce 30-day tracking."
+    },
+    {
+      "company_policy_id": "CP-012",
+      "title": "FTC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "We require opt-in for selling data to data brokers, but we still share browsing habits with our internal marketing affiliates without explicit consent."
+    },
+    {
+      "company_policy_id": "CP-013",
+      "title": "SEC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "We report cyber incidents to the SEC, but our internal legal review process mandates a 14-day window before disclosure to ensure accuracy."
+    },
+    {
+      "company_policy_id": "CP-014",
+      "title": "DOJ Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "We limit exclusive contracts to 3 years, but we allow automatic 1-year extensions without bidding if the vendor offers a 5% discount."
+    },
+    {
+      "company_policy_id": "CP-015",
+      "title": "OSHA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "We provide 15-minute breaks every 4 hours, but emergency exits in the overflow warehouse are sometimes blocked by temporary pallets during busy seasons."
+    },
+    {
+      "company_policy_id": "CP-016",
+      "title": "HIPAA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "HR",
+      "status": "Active",
+      "policy_text": "PHI is encrypted at rest, but some legacy internal applications still transmit patient IDs over unencrypted HTTP internally."
+    },
+    {
+      "company_policy_id": "CP-017",
+      "title": "FCC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "We don't throttle competitor traffic, but we route our own traffic through a dedicated fiber backbone, inadvertently giving it a slight latency advantage."
+    },
+    {
+      "company_policy_id": "CP-018",
+      "title": "DOE Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Engineering",
+      "status": "Active",
+      "policy_text": "Our datacenters operate at a 1.6 PUE. We are committed to purchasing renewable energy but currently source 100% from standard grid coal power."
+    },
+    {
+      "company_policy_id": "CP-019",
+      "title": "CFPB Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "Our micro-loans are capped at 30% APR, but late fees can occasionally push the effective rate to 38% for delinquent accounts."
+    },
+    {
+      "company_policy_id": "CP-020",
+      "title": "EPA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "We have a comprehensive emissions reporting dashboard, but it only covers our US operations and excludes our Canadian datacenters."
+    },
+    {
+      "company_policy_id": "CP-021",
+      "title": "FinCEN Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "IT",
+      "status": "Active",
+      "policy_text": "Employees working remotely in new states have their taxes adjusted after 90 days of residence, rather than 30 days."
+    },
+    {
+      "company_policy_id": "CP-022",
+      "title": "FTC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "Users must opt-in to marketing emails, but third-party cookie tracking is enabled by default until they dive into the settings menu to disable it."
+    },
+    {
+      "company_policy_id": "CP-023",
+      "title": "SEC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "Only incidents involving direct financial theft are reported to the SEC; data breaches involving PII are reported only to state regulators."
+    },
+    {
+      "company_policy_id": "CP-024",
+      "title": "DOJ Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "We conduct competitive bidding every 5 years instead of 3 years to reduce administrative overhead."
+    },
+    {
+      "company_policy_id": "CP-025",
+      "title": "CFPB Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "To maximize revenue, our short-term micro-loans carry a standard base APR of 55%."
+    },
+    {
+      "company_policy_id": "CP-026",
+      "title": "OSHA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "HR",
+      "status": "Active",
+      "policy_text": "Due to high production demands, warehouse staff breaks are limited to a single 10-minute period per 8-hour shift. Emergency exit doors are padlocked from the outside to prevent theft."
+    },
+    {
+      "company_policy_id": "CP-027",
+      "title": "HIPAA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "Patient records are stored in plaintext in our legacy database. We frequently sell lists of patient email addresses to pharmaceutical advertisers to subsidize our free tier."
+    },
+    {
+      "company_policy_id": "CP-028",
+      "title": "FCC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Engineering",
+      "status": "Active",
+      "policy_text": "We actively throttle bandwidth for competing video streaming services by 50% to ensure our proprietary media platform remains the fastest on our network."
+    },
+    {
+      "company_policy_id": "CP-029",
+      "title": "DOE Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "Our datacenters run at a highly inefficient 2.2 PUE. We rely entirely on diesel generators and coal power grids with no plans to adopt renewable energy sources."
+    },
+    {
+      "company_policy_id": "CP-030",
+      "title": "SEC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "Our corporate policy strictly forbids reporting any cybersecurity incidents to external regulators, including the SEC, to protect shareholder value and brand reputation."
+    },
+    {
+      "company_policy_id": "CP-031",
+      "title": "EPA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "IT",
+      "status": "Active",
+      "policy_text": "We proudly comply with all EPA regulations by reporting 100% of our domestic Scope 1 and Scope 2 emissions for all consolidated US entities. As part of our global optimization strategy, high-compute ML training workloads are dynamically routed to our independent Asian partners based on seasonal demand."
+    },
+    {
+      "company_policy_id": "CP-032",
+      "title": "FinCEN Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "State taxes are automatically withheld and paid based on the primary residential address registered in our official HR portal by the employee. Employees are granted a corporate mailbox in our Texas headquarters to receive company mail, which they may optionally list as their primary address for administrative convenience."
+    },
+    {
+      "company_policy_id": "CP-033",
+      "title": "FTC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "We strictly require explicit user opt-in before monetizing their data. Users must opt-in to the 'Enhanced Personalization Tier' to unlock the ability to save their files and access core features; otherwise, their account remains safely in read-only mode forever."
+    },
+    {
+      "company_policy_id": "CP-034",
+      "title": "SEC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "We rapidly disclose all material cyber incidents to the SEC within 4 business days. According to our internal corporate charter, an incident is legally classified as 'material' only when the direct financial loss exceeds 15% of annual gross revenue; all other breaches are classified as routine operational anomalies."
+    },
+    {
+      "company_policy_id": "CP-035",
+      "title": "DOJ Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "We embrace fair competition by ensuring all vendor contracts never exceed 2 years. However, our standard termination clause stipulates that choosing not to renew with the incumbent vendor incurs an 'infrastructure decoupling fee' equal to 4 years of projected revenue."
+    },
+    {
+      "company_policy_id": "CP-036",
+      "title": "OSHA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "HR",
+      "status": "Active",
+      "policy_text": "We prioritize worker well-being by offering unlimited flexible 15-minute breaks. However, warehouse staff are required to maintain a 98% active utilization rate over their 8-hour shift to qualify for their base salary and avoid immediate termination."
+    },
+    {
+      "company_policy_id": "CP-037",
+      "title": "HIPAA Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Infrastructure",
+      "status": "Active",
+      "policy_text": "We encrypt all PHI and never share raw data with advertisers. To drive healthcare innovation, we share 'anonymized' patient trend data with pharmaceutical partners; our robust anonymization process consists of hashing the patient's full name with a fast, unsalted MD5 algorithm."
+    },
+    {
+      "company_policy_id": "CP-038",
+      "title": "FCC Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Engineering",
+      "status": "Active",
+      "policy_text": "We believe in a free internet and absolutely never throttle or slow down competitor traffic on our networks. We do, however, offer a 'VIP Ultra-Low Latency Lane' for critical packets, which currently is only compatible with the proprietary protocols used by our own streaming service."
+    },
+    {
+      "company_policy_id": "CP-039",
+      "title": "DOE Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "We are deeply committed to green energy and source 30% of our datacenter power from renewable credits. These credits are purchased exclusively from a wholly-owned shell subsidiary that operates a single solar panel, allowing our main datacenters to continue running on 100% grid coal."
+    },
+    {
+      "company_policy_id": "CP-040",
+      "title": "CFPB Related Corporate Policy",
+      "category": "Corporate Operations",
+      "department": "Security",
+      "status": "Active",
+      "policy_text": "Our micro-loans are designed to be affordable and never exceed a 20% APR. To access our loan network, users must first subscribe to a mandatory $50/month 'Premium Financial Wellness Platform', which our legal team has successfully classified as a separate software subscription rather than a loan fee."
+    }
+  ]
+}

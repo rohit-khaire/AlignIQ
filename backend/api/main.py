@@ -8,7 +8,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.routes import compliance
-from api.routes.compliance import reset_session as reset_session_handler
+from api.routes import users
 from services.db_service import init_db
 from contextlib import asynccontextmanager
 
@@ -33,28 +33,31 @@ async def lifespan(app: FastAPI):
     logging.info("Shutting down...")
 
 app = FastAPI(
-    title="MasterPol Compliance API",
-    description="API for the MasterPol compliance engine.",
+    title="AlignIQ Compliance API",
+    description="API for the AlignIQ compliance engine.",
     version="1.0.0",
     lifespan=lifespan
 )
 
-# Configure CORS
+# Configure CORS — explicit origins for deployment; use env ALLOWED_ORIGINS comma-separated
+_allowed = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[o.strip() for o in _allowed if o.strip()],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Include routers
-app.include_router(compliance.router, prefix="/api/v1/compliance", tags=["Compliance"])
-
-@app.api_route("/reset", methods=["GET", "POST"])
-async def reset_root():
-    return await reset_session_handler()
+app.include_router(compliance.router, prefix="/api/v1/compliance", tags=["compliance"])
+app.include_router(users.router, prefix="/api/v1/users", tags=["users"])
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the MasterPol Compliance API"}
+    return {"message": "Welcome to the AlignIQ Compliance API", "status": "ok"}
+
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy", "service": "aligniq-api"}

@@ -202,7 +202,7 @@ Review the Auditor findings and Legal critique. For each gap or loophole:
 
 Format each item as:
 
-### [{requirement_id}] [Title]
+### [{{requirement_id}}] [Title]
 - **Operational Friction:** [1 sentence]
 - **Profit Impact:** [Revenue, cost, or velocity impact if we remediate strictly]
 - **Recommended Stance:** Remediate | Accept Risk | Compensating Control

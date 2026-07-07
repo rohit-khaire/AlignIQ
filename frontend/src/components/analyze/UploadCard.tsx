@@ -19,19 +19,31 @@ export const UploadCard: React.FC<UploadCardProps> = ({ onFileSelect }) => {
     }
   }, []);
 
+  const validateAndSelect = (file: File) => {
+    if (!file.name.toLowerCase().endsWith('.pdf')) {
+      alert('Please upload a PDF file containing your company policies.');
+      return;
+    }
+    if (file.size > 25 * 1024 * 1024) {
+      alert('PDF must be under 25MB.');
+      return;
+    }
+    onFileSelect(file);
+  };
+
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setIsDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      onFileSelect(e.dataTransfer.files[0]);
+      validateAndSelect(e.dataTransfer.files[0]);
     }
   }, [onFileSelect]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      onFileSelect(e.target.files[0]);
+      validateAndSelect(e.target.files[0]);
     }
   };
 
@@ -43,7 +55,7 @@ export const UploadCard: React.FC<UploadCardProps> = ({ onFileSelect }) => {
       className="w-full max-w-2xl mx-auto"
     >
       <div 
-        className={`glass-card rounded-2xl p-1 relative overflow-hidden transition-all duration-300 ${
+        className={`glass-card rounded-[21px] p-1 relative overflow-hidden transition-all duration-300 ${
           isDragging ? 'glow-border' : ''
         }`}
         onDragEnter={handleDrag}
@@ -51,10 +63,10 @@ export const UploadCard: React.FC<UploadCardProps> = ({ onFileSelect }) => {
         onDragOver={handleDrag}
         onDrop={handleDrop}
       >
-        <div className={`border-2 border-dashed rounded-xl p-12 text-center transition-colors duration-300 flex flex-col items-center justify-center min-h-[320px] ${
+        <div className={`border-2 border-dashed rounded-[17px] p-12 text-center transition-colors duration-300 flex flex-col items-center justify-center min-h-[320px] ${
           isDragging 
-            ? 'border-cyan-400 bg-cyan-500/5' 
-            : 'border-white/10 hover:border-white/20 bg-zinc-900/40'
+            ? 'border-primary bg-primary/5' 
+            : 'border-border hover:border-muted-foreground/30 bg-card/40'
         }`}>
           
           <input 
@@ -65,26 +77,34 @@ export const UploadCard: React.FC<UploadCardProps> = ({ onFileSelect }) => {
             accept=".pdf"
           />
           
-          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-zinc-800 to-zinc-700 flex items-center justify-center mb-6 shadow-xl border border-white/5">
-            <UploadCloud className={`w-8 h-8 transition-colors duration-300 ${isDragging ? 'text-cyan-400' : 'text-zinc-400'}`} />
+          <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mb-6 shadow-xl border border-border">
+            <UploadCloud className={`w-8 h-8 transition-colors duration-300 ${isDragging ? 'text-primary' : 'text-muted-foreground'}`} />
           </div>
           
-          <h3 className="text-xl font-medium text-white mb-2">
+          <h3 className="text-xl font-medium text-foreground mb-2">
             Drag & drop your policy document
           </h3>
-          <p className="text-zinc-400 mb-8 max-w-sm mx-auto">
+          <p className="text-muted-foreground mb-8 max-w-sm mx-auto">
             Upload organizational guidelines in PDF format to analyze against enterprise compliance standards instantly.
           </p>
           
+          <div className="flex gap-3 justify-center mb-6 flex-wrap">
+            {['PDF Extraction', 'SOC 2 Mapping', 'Multi-Agent Audit', 'Auto-Fix'].map((tag) => (
+              <span key={tag} className="text-[10px] font-medium px-2.5 py-1 rounded-[21px] bg-primary/10 text-primary border border-primary/20">
+                {tag}
+              </span>
+            ))}
+          </div>
+
           <div className="flex gap-4 justify-center mb-8">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/5 border border-white/5 text-xs text-zinc-500 font-medium">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-[21px] bg-muted/50 border border-border text-xs text-muted-foreground font-medium">
               <FileBadge2 className="w-3.5 h-3.5" /> PDF
             </div>
           </div>
           
           <label 
             htmlFor="file-upload"
-            className="px-6 py-3 rounded-xl bg-white text-black font-medium hover:bg-zinc-200 transition-colors cursor-pointer shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+            className="px-6 py-3 rounded-[21px] bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all cursor-pointer shadow-md"
           >
             Browse Files
           </label>

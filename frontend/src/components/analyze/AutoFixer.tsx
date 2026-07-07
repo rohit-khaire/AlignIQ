@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 import { API_URL } from '../../config';
 import { Loader2, Download, ArrowLeft, Wand2, FileText } from 'lucide-react';
+import { useAuth } from '@clerk/clerk-react';
 
 interface AutoFixerProps {
   onBack: () => void;
+  onSuccess?: () => void;
 }
 
-import ReactMarkdown from 'react-markdown';
-
-export const AutoFixer: React.FC<AutoFixerProps> = ({ onBack }) => {
+export const AutoFixer: React.FC<AutoFixerProps> = ({ onBack, onSuccess }) => {
+  const { userId } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [remediatedData, setRemediatedData] = useState<any[]>([]);
@@ -19,14 +21,17 @@ export const AutoFixer: React.FC<AutoFixerProps> = ({ onBack }) => {
       try {
         const response = await fetch(`${API_URL}/api/v1/compliance/autofix`, {
           method: 'POST',
+          headers: { 'X-User-ID': userId || 'anonymous' }
         });
         
         if (!response.ok) {
-          throw new Error('Failed to run autofix process.');
+          const err = await response.json().catch(() => ({}));
+          throw new Error(err.detail || 'Failed to run autofix process.');
         }
-        
+
         const result = await response.json();
         setRemediatedData(result.data.remediated_categories || []);
+        onSuccess?.();
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -35,10 +40,39 @@ export const AutoFixer: React.FC<AutoFixerProps> = ({ onBack }) => {
     };
     
     runAutoFix();
-  }, []);
+  }, [userId]);
 
   const handleDownload = (format: string) => {
-    window.open(`${API_URL}/api/v1/compliance/export-remediated?format=${format}`, '_blank');
+    // Note: window.open for download won't easily support custom headers like X-User-ID.
+    // Instead of window.open, we should use fetch if we need headers, but since the endpoint
+    // reads the header, we MUST use fetch and blob.
+    const downloadFile = async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/v1/compliance/export-remediated?format=${format}`, {
+          headers: { 'X-User-ID': userId || 'anonymous' }
+        });
+        if (!response.ok) throw new Error('Failed to export');
+        const blob = await response.blob();
+        let filename = `remediated_policies.${format}`;
+        const disposition = response.headers.get('Content-Disposition');
+        if (disposition && disposition.indexOf('filename=') !== -1) {
+          const filenameMatch = disposition.match(/filename="?([^"]+)"?/);
+          if (filenameMatch && filenameMatch.length === 2) filename = filenameMatch[1];
+        }
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      } catch (err) {
+        alert('Export failed');
+      }
+    };
+    downloadFile();
   };
 
   return (

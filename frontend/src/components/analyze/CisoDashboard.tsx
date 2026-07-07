@@ -6,6 +6,7 @@ import {
 } from 'recharts';
 import { Activity, TrendingUp, ShieldCheck, ShieldAlert, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useAuth } from '@clerk/clerk-react';
 
 interface CisoDashboardProps {
   currentScore: number;
@@ -14,6 +15,7 @@ interface CisoDashboardProps {
 }
 
 export const CisoDashboard: React.FC<CisoDashboardProps> = ({ currentScore, currentSatisfied, currentMissing }) => {
+  const { userId } = useAuth();
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +23,9 @@ export const CisoDashboard: React.FC<CisoDashboardProps> = ({ currentScore, curr
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await fetch(`${API_URL}/api/v1/compliance/history`);
+        const res = await fetch(`${API_URL}/api/v1/compliance/history`, {
+          headers: { 'X-User-ID': userId || 'anonymous' }
+        });
         if (!res.ok) throw new Error('Failed to fetch historical data');
         const json = await res.json();
         
@@ -35,16 +39,6 @@ export const CisoDashboard: React.FC<CisoDashboardProps> = ({ currentScore, curr
             fullDate: date.toLocaleDateString()
           };
         });
-        
-        // Append the live data as the final point so the graph ends on reality
-        formattedData.push({
-          score: currentScore,
-          satisfied: currentSatisfied,
-          missing: currentMissing,
-          dateLabel: 'Now',
-          fullDate: 'Current Scan'
-        });
-        
         setData(formattedData);
       } catch (err: any) {
         setError(err.message);
@@ -54,7 +48,7 @@ export const CisoDashboard: React.FC<CisoDashboardProps> = ({ currentScore, curr
     };
     
     fetchHistory();
-  }, [currentScore, currentSatisfied, currentMissing]);
+  }, [currentScore, currentSatisfied, currentMissing, userId]);
 
   if (loading) {
     return (
@@ -167,9 +161,9 @@ export const CisoDashboard: React.FC<CisoDashboardProps> = ({ currentScore, curr
         <div className="flex justify-between items-center mb-6 relative z-10">
           <h3 className="text-xl font-bold text-white flex items-center gap-3">
             <TrendingUp className="w-6 h-6 text-cyan-400" />
-            Compliance Trajectory
+            Historical Compliance Trajectory
           </h3>
-          <span className="px-3 py-1 bg-white/5 rounded-lg text-xs text-zinc-400 border border-white/10">Last 30 Days</span>
+          <span className="px-3 py-1 bg-white/5 rounded-lg text-xs text-zinc-400 border border-white/10">{data.length} Scans</span>
         </div>
 
         <div className="flex-1 w-full relative z-10">

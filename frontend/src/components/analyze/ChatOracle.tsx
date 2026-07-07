@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { API_URL } from '../../config';
 import { X, Send, Bot, User, Loader2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import { useAuth } from '@clerk/clerk-react';
 
 interface ChatOracleProps {
   isOpen: boolean;
@@ -15,6 +16,7 @@ interface Message {
 }
 
 export const ChatOracle: React.FC<ChatOracleProps> = ({ isOpen, onClose }) => {
+  const { userId } = useAuth();
   const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: "Hello! I am the Policy Oracle. Ask me anything about your compliance report, missing requirements, or company policies." }
   ]);
@@ -44,6 +46,7 @@ export const ChatOracle: React.FC<ChatOracleProps> = ({ isOpen, onClose }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-User-ID': userId || 'anonymous'
         },
         body: JSON.stringify({
           query: userMessage.content,

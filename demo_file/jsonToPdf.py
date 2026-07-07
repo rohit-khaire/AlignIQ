@@ -40,14 +40,19 @@ def create_pdf(json_file_path, pdf_file_path):
     policies = data.get("policies", [])
     for policy in policies:
         story.append(Paragraph(f"Policy ID: {policy.get('company_policy_id', '')}", heading_style))
-        story.append(Paragraph(f"<b>Title:</b> {policy.get('title', '')}", normal_style))
-        story.append(Paragraph(f"<b>Category:</b> {policy.get('category', '')}", normal_style))
-        story.append(Paragraph(f"<b>Department:</b> {policy.get('department', '')}", normal_style))
-        story.append(Paragraph(f"<b>Status:</b> {policy.get('status', '')}", normal_style))
+        story.append(Spacer(1, 6))
+        story.append(Paragraph(f"Title: {policy.get('title', '')}", normal_style))
+        story.append(Spacer(1, 6))
+        story.append(Paragraph(f"Category: {policy.get('category', '')}", normal_style))
+        story.append(Spacer(1, 6))
+        story.append(Paragraph(f"Department: {policy.get('department', '')}", normal_style))
+        story.append(Spacer(1, 6))
+        story.append(Paragraph(f"Status: {policy.get('status', '')}", normal_style))
+        story.append(Spacer(1, 6))
         
         # Text wrapping for policy text
         policy_text = policy.get('policy_text', '')
-        story.append(Paragraph(f"<b>Policy Text:</b> {policy_text}", normal_style))
+        story.append(Paragraph(f"Policy Text: {policy_text}", normal_style))
         
         story.append(Spacer(1, 15))
 
@@ -55,4 +60,4 @@ def create_pdf(json_file_path, pdf_file_path):
     print(f"Successfully generated {pdf_file_path} from {json_file_path}")
 
 if __name__ == "__main__":
-    create_pdf("company_policies.json", "Rk.pdf")
+    create_pdf("company_policies.json", "company_policies.pdf")

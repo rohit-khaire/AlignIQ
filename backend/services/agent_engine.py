@@ -171,7 +171,7 @@ Review the Auditor's findings and identify:
 
 For EACH issue, use this format:
 
-### [{requirement_id}] [Short Title]
+### [{{requirement_id}}] [Short Title]
 - **Loophole Type:** Compliance Risk | Profit-Preserving | Acceptable Risk
 - **Finding:** [1 sentence]
 - **Business Impact:** [1 sentence]

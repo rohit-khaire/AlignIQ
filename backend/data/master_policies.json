@@ -1,983 +1,328 @@
 {
-    "document_title": "Enterprise Information Security & Operational Compliance Manual (Fictional Demo Version)",
-    "document_note": "Fictional compliance policy manual created for software demos, AI research, RAG, and semantic search testing. Does not represent any real company or regulation.",
-    "total_policies_in_document": 86,
-    "policies_returned": 10,
-    "policies": [
+  "document_title": "Enterprise Compliance & Regulatory Master Policies Manual (Fictional Demo)",
+  "document_note": "Fictional compliance policy manual created for software demos, AI research, and compliance checks. Does not represent any real company or regulation.",
+  "total_policies_in_document": 5,
+  "policies_returned": 5,
+  "policies": [
+    {
+      "policy_id": "ENV-001",
+      "title": "EPA Emissions Reporting Regulation",
+      "category": "Environmental Compliance",
+      "risk_level": "High",
+      "department": "Corporate Sustainability & Operations",
+      "owner": "Director of Environmental Health and Safety",
+      "version": "1.0",
+      "effective_date": "January 15, 2026",
+      "review_cycle": "Annual",
+      "priority": "High",
+      "status": "Active",
+      "business_objective": "Ensure accurate corporate carbon emission reporting and prevent evasion via offshoring.",
+      "policy_statement": "Corporations must report 100% of Scope 1 and Scope 2 carbon emissions annually. Compute workloads, manufacturing, or operations must not be offshored to foreign partners or unregulated entities for the purpose of evading domestic reporting limits or carbon taxes.",
+      "detailed_requirements": [
         {
-            "policy_id": "AUTH-001",
-            "title": "Password Complexity Requirements",
-            "category": "Authentication",
-            "risk_level": "High",
-            "department": "Identity & Access Management",
-            "owner": "Director of Identity & Access Management",
-            "version": "3.4",
-            "effective_date": "March 8, 2025",
-            "review_cycle": "Annual",
-            "priority": "High",
-            "status": "Active",
-            "business_objective": "Authentication controls establish confidence that a party requesting access to a system is who they claim to be, forming the first line of defense against unauthorized account use. The Password Complexity Requirements policy applies this principle specifically to password complexity requirements, establishing a clear, auditable baseline that reduces the likelihood of a preventable security or compliance failure in this area.",
-            "policy_statement": "All systems, personnel, and processes within scope of Authentication must comply with the requirements defined under Password Complexity Requirements, and exceptions must be formally documented and approved by Director of Identity & Access Management.",
-            "detailed_requirements": [
-                {
-                    "requirement_id": "AUTH-001-R1",
-                    "requirement_text": "Credentials must never be transmitted or stored in plaintext."
-                },
-                {
-                    "requirement_id": "AUTH-001-R2",
-                    "requirement_text": "Authentication attempts must be rate-limited to reduce brute-force exposure."
-                },
-                {
-                    "requirement_id": "AUTH-001-R3",
-                    "requirement_text": "Default vendor credentials must be changed prior to production deployment."
-                },
-                {
-                    "requirement_id": "AUTH-001-R4",
-                    "requirement_text": "Authentication events must be logged with timestamp, source IP, and outcome."
-                },
-                {
-                    "requirement_id": "AUTH-001-R5",
-                    "requirement_text": "Session tokens issued after authentication must expire after a defined inactivity period."
-                },
-                {
-                    "requirement_id": "AUTH-001-R6",
-                    "requirement_text": "Authentication mechanisms must be reviewed at least annually for continued adequacy."
-                },
-                {
-                    "requirement_id": "AUTH-001-R7",
-                    "requirement_text": "Fallback or legacy authentication paths must be disabled unless formally approved."
-                }
-            ],
-            "indicators_of_non_compliance": [
-                "Use of shared login credentials across multiple employees",
-                "Authentication endpoints without rate limiting or lockout",
-                "Default or vendor-supplied credentials still active in production",
-                "Absence of authentication event logging"
-            ],
-            "required_evidence": [
-                "Authentication system configuration exports",
-                "Identity provider configuration screenshots",
-                "Sample authentication logs covering a 30-day window",
-                "Password policy configuration from directory services",
-                "Account lockout configuration settings"
-            ],
-            "recommended_remediation": "To remediate a violation of Password Complexity Requirements, the accountable team should: (1) Reconfigure the affected authentication system to align with the documented policy baseline and validate the change in a staging environment before production rollout. (2) Disable non-compliant authentication paths and route all access through the approved identity provider. Remediation actions must be tracked to closure and verified by an independent reviewer before the associated finding is closed.",
-            "related_policies": [
-                "AUTH-002",
-                "AUTH-003",
-                "AUTHZ-001"
-            ],
-            "ai_summary": "This policy defines mandatory controls for password complexity requirements within the Authentication domain, specifying required safeguards, common failure indicators, and evidence auditors should expect to see. It is classified as High risk and applies to all in-scope systems and personnel under Identity & Access Management.",
-            "example_compliant_scenario": "A system owner within Identity & Access Management implements Password Complexity Requirements in full: required controls are configured as specified, evidence such as authentication system configuration exports is retained and current, and the most recent internal review confirmed no open findings against this policy. When queried during an audit, the team produces the relevant identity provider configuration screenshots without delay.",
-            "example_non_compliant_scenario": "During a routine review, an auditor discovers that use of shared login credentials across multiple employees. Further investigation reveals that authentication endpoints without rate limiting or lockout, and no compensating control was documented. The finding is logged against AUTH-001 with a High risk rating and routed to Director of Identity & Access Management for remediation per the defined timeline.",
-            "keywords": [
-                "authentication",
-                "login",
-                "credentials",
-                "identity",
-                "session",
-                "password",
-                "lockout",
-                "brute force",
-                "identity provider",
-                "single sign-on",
-                "SSO",
-                "token",
-                "verification",
-                "access request"
-            ],
-            "search_tags": [
-                "Authentication",
-                "Identity",
-                "IAM",
-                "Login",
-                "Security",
-                "Credentials",
-                "Access Control",
-                "Session Management",
-                "SSO",
-                "Policy",
-                "Enterprise Security"
-            ],
-            "evidence_types": [
-                "Authentication system configuration exports",
-                "Identity provider configuration screenshots",
-                "Sample authentication logs covering a 30-day window",
-                "Password policy configuration from directory services",
-                "Account lockout configuration settings"
-            ]
+          "requirement_id": "ENV-001-R1",
+          "requirement_text": "Emissions must be fully reported annually for all domestic Scope 1 (direct) and Scope 2 (indirect energy) activities."
         },
         {
-            "policy_id": "AUTH-002",
-            "title": "Account Lockout Thresholds",
-            "category": "Authentication",
-            "risk_level": "Medium",
-            "department": "Identity & Access Management",
-            "owner": "Director of Identity & Access Management",
-            "version": "3.6",
-            "effective_date": "January 1, 2025",
-            "review_cycle": "Annual",
-            "priority": "Medium",
-            "status": "Active",
-            "business_objective": "Authentication controls establish confidence that a party requesting access to a system is who they claim to be, forming the first line of defense against unauthorized account use. The Account Lockout Thresholds policy applies this principle specifically to account lockout thresholds, establishing a clear, auditable baseline that reduces the likelihood of a preventable security or compliance failure in this area.",
-            "policy_statement": "All systems, personnel, and processes within scope of Authentication must comply with the requirements defined under Account Lockout Thresholds, and exceptions must be formally documented and approved by Director of Identity & Access Management.",
-            "detailed_requirements": [
-                {
-                    "requirement_id": "AUTH-002-R1",
-                    "requirement_text": "Default vendor credentials must be changed prior to production deployment."
-                },
-                {
-                    "requirement_id": "AUTH-002-R2",
-                    "requirement_text": "Authentication events must be logged with timestamp, source IP, and outcome."
-                },
-                {
-                    "requirement_id": "AUTH-002-R3",
-                    "requirement_text": "Session tokens issued after authentication must expire after a defined inactivity period."
-                },
-                {
-                    "requirement_id": "AUTH-002-R4",
-                    "requirement_text": "Authentication mechanisms must be reviewed at least annually for continued adequacy."
-                },
-                {
-                    "requirement_id": "AUTH-002-R5",
-                    "requirement_text": "Fallback or legacy authentication paths must be disabled unless formally approved."
-                },
-                {
-                    "requirement_id": "AUTH-002-R6",
-                    "requirement_text": "Shared or generic accounts are prohibited for individual authentication."
-                },
-                {
-                    "requirement_id": "AUTH-002-R7",
-                    "requirement_text": "Authentication failures must not reveal whether a username or password was incorrect."
-                }
-            ],
-            "indicators_of_non_compliance": [
-                "Absence of authentication event logging",
-                "Password reset flows that do not verify identity",
-                "Legacy authentication protocols enabled without justification",
-                "Session tokens that never expire",
-                "Use of shared login credentials across multiple employees",
-                "Authentication endpoints without rate limiting or lockout"
-            ],
-            "required_evidence": [
-                "Account lockout configuration settings",
-                "Session timeout configuration records",
-                "Change tickets related to authentication systems",
-                "Authentication system configuration exports",
-                "Identity provider configuration screenshots"
-            ],
-            "recommended_remediation": "To remediate a violation of Account Lockout Thresholds, the accountable team should: (1) Disable non-compliant authentication paths and route all access through the approved identity provider. (2) Implement centralized logging for authentication events and route logs to the security monitoring platform. Remediation actions must be tracked to closure and verified by an independent reviewer before the associated finding is closed.",
-            "related_policies": [
-                "AUTH-001",
-                "AUTH-003",
-                "PWD-002"
-            ],
-            "ai_summary": "This policy defines mandatory controls for account lockout thresholds within the Authentication domain, specifying required safeguards, common failure indicators, and evidence auditors should expect to see. It is classified as Medium risk and applies to all in-scope systems and personnel under Identity & Access Management.",
-            "example_compliant_scenario": "A system owner within Identity & Access Management implements Account Lockout Thresholds in full: required controls are configured as specified, evidence such as account lockout configuration settings is retained and current, and the most recent internal review confirmed no open findings against this policy. When queried during an audit, the team produces the relevant session timeout configuration records without delay.",
-            "example_non_compliant_scenario": "During a routine review, an auditor discovers that absence of authentication event logging. Further investigation reveals that password reset flows that do not verify identity, and no compensating control was documented. The finding is logged against AUTH-002 with a Medium risk rating and routed to Director of Identity & Access Management for remediation per the defined timeline.",
-            "keywords": [
-                "credentials",
-                "identity",
-                "session",
-                "password",
-                "lockout",
-                "brute force",
-                "identity provider",
-                "single sign-on",
-                "SSO",
-                "token",
-                "verification",
-                "access request",
-                "login attempt",
-                "authentication log"
-            ],
-            "search_tags": [
-                "Login",
-                "Security",
-                "Credentials",
-                "Access Control",
-                "Session Management",
-                "SSO",
-                "Policy",
-                "Enterprise Security",
-                "Identity Provider",
-                "Authentication",
-                "Identity"
-            ],
-            "evidence_types": [
-                "Account lockout configuration settings",
-                "Session timeout configuration records",
-                "Change tickets related to authentication systems",
-                "Authentication system configuration exports",
-                "Identity provider configuration screenshots"
-            ]
-        },
-        {
-            "policy_id": "AUTH-003",
-            "title": "Single Sign-On Enforcement",
-            "category": "Authentication",
-            "risk_level": "High",
-            "department": "Identity & Access Management",
-            "owner": "Director of Identity & Access Management",
-            "version": "3.3",
-            "effective_date": "October 21, 2025",
-            "review_cycle": "Quarterly",
-            "priority": "High",
-            "status": "Under Review",
-            "business_objective": "Authentication controls establish confidence that a party requesting access to a system is who they claim to be, forming the first line of defense against unauthorized account use. The Single Sign-On Enforcement policy applies this principle specifically to single sign-on enforcement, establishing a clear, auditable baseline that reduces the likelihood of a preventable security or compliance failure in this area.",
-            "policy_statement": "All systems, personnel, and processes within scope of Authentication must comply with the requirements defined under Single Sign-On Enforcement, and exceptions must be formally documented and approved by Director of Identity & Access Management.",
-            "detailed_requirements": [
-                {
-                    "requirement_id": "AUTH-003-R1",
-                    "requirement_text": "Session tokens issued after authentication must expire after a defined inactivity period."
-                },
-                {
-                    "requirement_id": "AUTH-003-R2",
-                    "requirement_text": "Authentication mechanisms must be reviewed at least annually for continued adequacy."
-                },
-                {
-                    "requirement_id": "AUTH-003-R3",
-                    "requirement_text": "Fallback or legacy authentication paths must be disabled unless formally approved."
-                },
-                {
-                    "requirement_id": "AUTH-003-R4",
-                    "requirement_text": "Shared or generic accounts are prohibited for individual authentication."
-                },
-                {
-                    "requirement_id": "AUTH-003-R5",
-                    "requirement_text": "Authentication failures must not reveal whether a username or password was incorrect."
-                }
-            ],
-            "indicators_of_non_compliance": [
-                "Session tokens that never expire",
-                "Use of shared login credentials across multiple employees",
-                "Authentication endpoints without rate limiting or lockout",
-                "Default or vendor-supplied credentials still active in production",
-                "Absence of authentication event logging",
-                "Password reset flows that do not verify identity"
-            ],
-            "required_evidence": [
-                "Identity provider configuration screenshots",
-                "Sample authentication logs covering a 30-day window",
-                "Password policy configuration from directory services",
-                "Account lockout configuration settings",
-                "Session timeout configuration records"
-            ],
-            "recommended_remediation": "To remediate a violation of Single Sign-On Enforcement, the accountable team should: (1) Implement centralized logging for authentication events and route logs to the security monitoring platform. (2) Conduct a credential audit to identify and rotate any default, shared, or stale credentials. Remediation actions must be tracked to closure and verified by an independent reviewer before the associated finding is closed.",
-            "related_policies": [
-                "AUTH-001",
-                "AUTH-002",
-                "AC-003"
-            ],
-            "ai_summary": "This policy defines mandatory controls for single sign-on enforcement within the Authentication domain, specifying required safeguards, common failure indicators, and evidence auditors should expect to see. It is classified as High risk and applies to all in-scope systems and personnel under Identity & Access Management.",
-            "example_compliant_scenario": "A system owner within Identity & Access Management implements Single Sign-On Enforcement in full: required controls are configured as specified, evidence such as identity provider configuration screenshots is retained and current, and the most recent internal review confirmed no open findings against this policy. When queried during an audit, the team produces the relevant sample authentication logs covering a 30-day window without delay.",
-            "example_non_compliant_scenario": "During a routine review, an auditor discovers that session tokens that never expire. Further investigation reveals that use of shared login credentials across multiple employees, and no compensating control was documented. The finding is logged against AUTH-003 with a High risk rating and routed to Director of Identity & Access Management for remediation per the defined timeline.",
-            "keywords": [
-                "session",
-                "password",
-                "lockout",
-                "brute force",
-                "identity provider",
-                "single sign-on",
-                "SSO",
-                "token",
-                "verification",
-                "access request",
-                "login attempt",
-                "authentication log",
-                "recovery workflow",
-                "legacy protocol"
-            ],
-            "search_tags": [
-                "Access Control",
-                "Session Management",
-                "SSO",
-                "Policy",
-                "Enterprise Security",
-                "Identity Provider",
-                "Authentication",
-                "Identity",
-                "IAM",
-                "Login",
-                "Security"
-            ],
-            "evidence_types": [
-                "Identity provider configuration screenshots",
-                "Sample authentication logs covering a 30-day window",
-                "Password policy configuration from directory services",
-                "Account lockout configuration settings",
-                "Session timeout configuration records"
-            ]
-        },
-        {
-            "policy_id": "AUTHZ-001",
-            "title": "Role-Based Access Control Enforcement",
-            "category": "Authorization",
-            "risk_level": "High",
-            "department": "Identity & Access Management",
-            "owner": "Director of Identity & Access Management",
-            "version": "1.2",
-            "effective_date": "October 14, 2025",
-            "review_cycle": "Semi-Annual",
-            "priority": "High",
-            "status": "Active",
-            "business_objective": "Authorization controls ensure that authenticated parties can only perform actions and access resources consistent with their assigned role, limiting the blast radius of any single compromised account. The Role-Based Access Control Enforcement policy applies this principle specifically to role-based access control enforcement, establishing a clear, auditable baseline that reduces the likelihood of a preventable security or compliance failure in this area.",
-            "policy_statement": "All systems, personnel, and processes within scope of Authorization must comply with the requirements defined under Role-Based Access Control Enforcement, and exceptions must be formally documented and approved by Director of Identity & Access Management.",
-            "detailed_requirements": [
-                {
-                    "requirement_id": "AUTHZ-001-R1",
-                    "requirement_text": "Authorization policies must be version-controlled and peer-reviewed before deployment."
-                },
-                {
-                    "requirement_id": "AUTHZ-001-R2",
-                    "requirement_text": "Default-deny must be the standard posture for all new resource types."
-                },
-                {
-                    "requirement_id": "AUTHZ-001-R3",
-                    "requirement_text": "Access rights must be assigned based on documented job function, not individual request."
-                },
-                {
-                    "requirement_id": "AUTHZ-001-R4",
-                    "requirement_text": "Authorization decisions must be enforced at the resource layer, not solely in the client application."
-                },
-                {
-                    "requirement_id": "AUTHZ-001-R5",
-                    "requirement_text": "Elevated privileges must require a documented, time-bound approval."
-                }
-            ],
-            "indicators_of_non_compliance": [
-                "Absence of periodic entitlement review records",
-                "Segregation-of-duties conflicts left unresolved",
-                "New resources deployed with default-allow permissions",
-                "Users retaining access rights inconsistent with their current role",
-                "Standing administrative privileges without expiration"
-            ],
-            "required_evidence": [
-                "Role and permission matrices",
-                "Entitlement review sign-off records",
-                "Access approval tickets",
-                "Identity governance platform exports",
-                "Segregation-of-duties conflict reports",
-                "Authorization policy source files"
-            ],
-            "recommended_remediation": "To remediate a violation of Role-Based Access Control Enforcement, the accountable team should: (1) Move authorization enforcement to the server or API gateway layer. (2) Revoke inconsistent entitlements and re-provision access strictly according to the role-based access model. Remediation actions must be tracked to closure and verified by an independent reviewer before the associated finding is closed.",
-            "related_policies": [
-                "AUTHZ-002",
-                "KEY-001",
-                "KEY-002"
-            ],
-            "ai_summary": "This policy defines mandatory controls for role-based access control enforcement within the Authorization domain, specifying required safeguards, common failure indicators, and evidence auditors should expect to see. It is classified as High risk and applies to all in-scope systems and personnel under Identity & Access Management.",
-            "example_compliant_scenario": "A system owner within Identity & Access Management implements Role-Based Access Control Enforcement in full: required controls are configured as specified, evidence such as role and permission matrices is retained and current, and the most recent internal review confirmed no open findings against this policy. When queried during an audit, the team produces the relevant entitlement review sign-off records without delay.",
-            "example_non_compliant_scenario": "During a routine review, an auditor discovers that absence of periodic entitlement review records. Further investigation reveals that segregation-of-duties conflicts left unresolved, and no compensating control was documented. The finding is logged against AUTHZ-001 with a High risk rating and routed to Director of Identity & Access Management for remediation per the defined timeline.",
-            "keywords": [
-                "least privilege",
-                "approval workflow",
-                "permission",
-                "role",
-                "access review",
-                "default deny",
-                "elevation",
-                "governance",
-                "standing access",
-                "authorization",
-                "RBAC",
-                "entitlement",
-                "privilege",
-                "access rights"
-            ],
-            "search_tags": [
-                "Least Privilege",
-                "Authorization",
-                "RBAC",
-                "Access Control",
-                "IAM",
-                "Privilege Management",
-                "Entitlements",
-                "Security",
-                "Governance",
-                "Policy"
-            ],
-            "evidence_types": [
-                "Role and permission matrices",
-                "Entitlement review sign-off records",
-                "Access approval tickets",
-                "Identity governance platform exports",
-                "Segregation-of-duties conflict reports",
-                "Authorization policy source files"
-            ]
-        },
-        {
-            "policy_id": "AUTHZ-002",
-            "title": "Privilege Escalation Approval Workflow",
-            "category": "Authorization",
-            "risk_level": "Critical",
-            "department": "Identity & Access Management",
-            "owner": "Director of Identity & Access Management",
-            "version": "1.1",
-            "effective_date": "June 4, 2025",
-            "review_cycle": "Semi-Annual",
-            "priority": "Critical",
-            "status": "Active",
-            "business_objective": "Authorization controls ensure that authenticated parties can only perform actions and access resources consistent with their assigned role, limiting the blast radius of any single compromised account. The Privilege Escalation Approval Workflow policy applies this principle specifically to privilege escalation approval workflow, establishing a clear, auditable baseline that reduces the likelihood of a preventable security or compliance failure in this area.",
-            "policy_statement": "All systems, personnel, and processes within scope of Authorization must comply with the requirements defined under Privilege Escalation Approval Workflow, and exceptions must be formally documented and approved by Director of Identity & Access Management.",
-            "detailed_requirements": [
-                {
-                    "requirement_id": "AUTHZ-002-R1",
-                    "requirement_text": "Access rights must be assigned based on documented job function, not individual request."
-                },
-                {
-                    "requirement_id": "AUTHZ-002-R2",
-                    "requirement_text": "Authorization decisions must be enforced at the resource layer, not solely in the client application."
-                },
-                {
-                    "requirement_id": "AUTHZ-002-R3",
-                    "requirement_text": "Elevated privileges must require a documented, time-bound approval."
-                },
-                {
-                    "requirement_id": "AUTHZ-002-R4",
-                    "requirement_text": "Entitlement reviews must occur at least quarterly for systems handling sensitive data."
-                },
-                {
-                    "requirement_id": "AUTHZ-002-R5",
-                    "requirement_text": "Segregation of duties must be maintained for financially or operationally sensitive workflows."
-                }
-            ],
-            "indicators_of_non_compliance": [
-                "Users retaining access rights inconsistent with their current role",
-                "Standing administrative privileges without expiration",
-                "Authorization logic implemented only in the client rather than the server",
-                "Absence of periodic entitlement review records"
-            ],
-            "required_evidence": [
-                "Segregation-of-duties conflict reports",
-                "Authorization policy source files",
-                "Role and permission matrices",
-                "Entitlement review sign-off records",
-                "Access approval tickets",
-                "Identity governance platform exports"
-            ],
-            "recommended_remediation": "To remediate a violation of Privilege Escalation Approval Workflow, the accountable team should: (1) Revoke inconsistent entitlements and re-provision access strictly according to the role-based access model. (2) Introduce time-bound privilege elevation with automatic expiry and mandatory approval logging. Remediation actions must be tracked to closure and verified by an independent reviewer before the associated finding is closed.",
-            "related_policies": [
-                "AUTHZ-001",
-                "CLOUD-002",
-                "CLOUD-003"
-            ],
-            "ai_summary": "Fictional Demo Document \u2014 Not a real compliance framework Page 14 This policy defines mandatory controls for privilege escalation approval workflow within the Authorization domain, specifying required safeguards, common failure indicators, and evidence auditors should expect to see. It is classified as Critical risk and applies to all in-scope systems and personnel under Identity & Access Management.",
-            "example_compliant_scenario": "A system owner within Identity & Access Management implements Privilege Escalation Approval Workflow in full: required controls are configured as specified, evidence such as segregation-of-duties conflict reports is retained and current, and the most recent internal review confirmed no open findings against this policy. When queried during an audit, the team produces the relevant authorization policy source files without delay.",
-            "example_non_compliant_scenario": "During a routine review, an auditor discovers that users retaining access rights inconsistent with their current role. Further investigation reveals that standing administrative privileges without expiration, and no compensating control was documented. The finding is logged against AUTHZ-002 with a Critical risk rating and routed to Director of Identity & Access Management for remediation per the defined timeline.",
-            "keywords": [
-                "permission",
-                "role",
-                "access review",
-                "default deny",
-                "elevation",
-                "governance",
-                "standing access",
-                "authorization",
-                "RBAC",
-                "entitlement",
-                "privilege",
-                "access rights",
-                "segregation of duties",
-                "least privilege"
-            ],
-            "search_tags": [
-                "Access Control",
-                "IAM",
-                "Privilege Management",
-                "Entitlements",
-                "Security",
-                "Governance",
-                "Policy",
-                "Least Privilege",
-                "Authorization",
-                "RBAC"
-            ],
-            "evidence_types": [
-                "Segregation-of-duties conflict reports",
-                "Authorization policy source files",
-                "Role and permission matrices",
-                "Entitlement review sign-off records",
-                "Access approval tickets",
-                "Identity governance platform exports"
-            ]
-        },
-        {
-            "policy_id": "IDM-001",
-            "title": "Joiner-Mover-Leaver Identity Lifecycle",
-            "category": "Identity Management",
-            "risk_level": "High",
-            "department": "Identity & Access Management",
-            "owner": "Director of Identity & Access Management",
-            "version": "3.7",
-            "effective_date": "August 4, 2025",
-            "review_cycle": "Semi-Annual",
-            "priority": "High",
-            "status": "Active",
-            "business_objective": "Identity management policies govern the full lifecycle of digital identities, from provisioning through deprovisioning, ensuring that access accurately reflects an individual's current relationship with the organization. The Joiner-Mover-Leaver Identity Lifecycle policy applies this principle specifically to joiner-mover-leaver identity lifecycle, establishing a clear, auditable baseline that reduces the likelihood of a preventable security or compliance failure in this area.",
-            "policy_statement": "All systems, personnel, and processes within scope of Identity Management must comply with the requirements defined under Joiner-Mover-Leaver Identity Lifecycle, and exceptions must be formally documented and approved by Director of Identity & Access Management.",
-            "detailed_requirements": [
-                {
-                    "requirement_id": "IDM-001-R1",
-                    "requirement_text": "Access must be automatically adjusted when an employee changes role."
-                },
-                {
-                    "requirement_id": "IDM-001-R2",
-                    "requirement_text": "All accounts must be deprovisioned within a defined window following termination."
-                },
-                {
-                    "requirement_id": "IDM-001-R3",
-                    "requirement_text": "Service accounts must have a named human owner accountable for their use."
-                },
-                {
-                    "requirement_id": "IDM-001-R4",
-                    "requirement_text": "Identity records must be reconciled against the HR system on a recurring basis."
-                },
-                {
-                    "requirement_id": "IDM-001-R5",
-                    "requirement_text": "Dormant identities must be flagged and disabled after a defined inactivity period."
-                },
-                {
-                    "requirement_id": "IDM-001-R6",
-                    "requirement_text": "Identity provisioning and deprovisioning actions must be logged and auditable."
-                },
-                {
-                    "requirement_id": "IDM-001-R7",
-                    "requirement_text": "New identities must be provisioned only after HR or sponsoring-manager confirmation."
-                }
-            ],
-            "indicators_of_non_compliance": [
-                "Terminated employee accounts still active",
-                "Service accounts with no identifiable owner",
-                "Identity attributes that do not match the HR system of record",
-                "Manual, undocumented provisioning outside the standard workflow",
-                "Dormant accounts with no expiration or review process"
-            ],
-            "required_evidence": [
-                "Identity lifecycle workflow configuration",
-                "HR-to-IT provisioning integration logs",
-                "Termination checklist records",
-                "Service account inventory and ownership register",
-                "Dormant account review reports"
-            ],
-            "recommended_remediation": "To remediate a violation of Joiner-Mover-Leaver Identity Lifecycle, the accountable team should: (1) Assign a named accountable owner to every service account and review ownership annually. (2) Implement a recurring reconciliation job comparing identity records against HR data. Remediation actions must be tracked to closure and verified by an independent reviewer before the associated finding is closed.",
-            "related_policies": [
-                "IDM-002",
-                "FW-002",
-                "EP-001"
-            ],
-            "ai_summary": "This policy defines mandatory controls for joiner-mover-leaver identity lifecycle within the Identity Management domain, specifying required safeguards, common failure indicators, and evidence auditors should expect to see. It is classified as High risk and applies to all in-scope systems and personnel under Identity & Access Management.",
-            "example_compliant_scenario": "A system owner within Identity & Access Management implements Joiner-Mover-Leaver Identity Lifecycle in full: required controls are configured as specified, evidence such as identity lifecycle workflow configuration is retained and current, and the most recent internal review confirmed no open findings against this policy. When queried during an audit, the team produces the relevant hr-to-it provisioning integration logs without delay.",
-            "example_non_compliant_scenario": "During a routine review, an auditor discovers that terminated employee accounts still active. Further investigation reveals that service accounts with no identifiable owner, and no compensating control was documented. The finding is logged against IDM-001 with a High risk rating and routed to Director of Identity & Access Management for remediation per the defined timeline.",
-            "keywords": [
-                "onboarding",
-                "system of record",
-                "identity lifecycle",
-                "provisioning",
-                "deprovisioning",
-                "joiner mover leaver",
-                "service account",
-                "identity governance",
-                "HR integration",
-                "dormant account",
-                "account ownership",
-                "offboarding"
-            ],
-            "search_tags": [
-                "Governance",
-                "Security",
-                "HR Integration",
-                "Identity Management",
-                "IAM",
-                "Lifecycle",
-                "Provisioning",
-                "Offboarding",
-                "Service Accounts"
-            ],
-            "evidence_types": [
-                "Identity lifecycle workflow configuration",
-                "HR-to-IT provisioning integration logs",
-                "Termination checklist records",
-                "Service account inventory and ownership register",
-                "Dormant account review reports"
-            ]
-        },
-        {
-            "policy_id": "IDM-002",
-            "title": "Service Account Governance",
-            "category": "Identity Management",
-            "risk_level": "High",
-            "department": "Identity & Access Management",
-            "owner": "Director of Identity & Access Management",
-            "version": "3.3",
-            "effective_date": "October 3, 2025",
-            "review_cycle": "Annual",
-            "priority": "High",
-            "status": "Active",
-            "business_objective": "Identity management policies govern the full lifecycle of digital identities, from provisioning through deprovisioning, ensuring that access accurately reflects an individual's current relationship with the organization. The Service Account Governance policy applies this principle specifically to service account governance, establishing a clear, auditable baseline that reduces the likelihood of a preventable security or compliance failure in this area.",
-            "policy_statement": "All systems, personnel, and processes within scope of Identity Management must comply with the requirements defined under Service Account Governance, and exceptions must be formally documented and approved by Director of Identity & Access Management.",
-            "detailed_requirements": [
-                {
-                    "requirement_id": "IDM-002-R1",
-                    "requirement_text": "Service accounts must have a named human owner accountable for their use."
-                },
-                {
-                    "requirement_id": "IDM-002-R2",
-                    "requirement_text": "Identity records must be reconciled against the HR system on a recurring basis."
-                },
-                {
-                    "requirement_id": "IDM-002-R3",
-                    "requirement_text": "Dormant identities must be flagged and disabled after a defined inactivity period."
-                },
-                {
-                    "requirement_id": "IDM-002-R4",
-                    "requirement_text": "Identity provisioning and deprovisioning actions must be logged and auditable."
-                },
-                {
-                    "requirement_id": "IDM-002-R5",
-                    "requirement_text": "New identities must be provisioned only after HR or sponsoring-manager confirmation."
-                },
-                {
-                    "requirement_id": "IDM-002-R6",
-                    "requirement_text": "Identity attributes must be sourced from an authoritative system of record."
-                },
-                {
-                    "requirement_id": "IDM-002-R7",
-                    "requirement_text": "Access must be automatically adjusted when an employee changes role."
-                }
-            ],
-            "indicators_of_non_compliance": [
-                "Manual, undocumented provisioning outside the standard workflow",
-                "Dormant accounts with no expiration or review process",
-                "Terminated employee accounts still active",
-                "Service accounts with no identifiable owner",
-                "Identity attributes that do not match the HR system of record"
-            ],
-            "required_evidence": [
-                "Dormant account review reports",
-                "Identity lifecycle workflow configuration",
-                "HR-to-IT provisioning integration logs",
-                "Termination checklist records",
-                "Service account inventory and ownership register"
-            ],
-            "recommended_remediation": "To remediate a violation of Service Account Governance, the accountable team should: (1) Implement a recurring reconciliation job comparing identity records against HR data. (2) Disable and archive dormant accounts pending formal review. Remediation actions must be tracked to closure and verified by an independent reviewer before the associated finding is closed.",
-            "related_policies": [
-                "IDM-001",
-                "LOG-001",
-                "LOG-002"
-            ],
-            "ai_summary": "This policy defines mandatory controls for service account governance within the Identity Management domain, specifying required safeguards, common failure indicators, and evidence auditors should expect to see. It is classified as High risk and applies to all in-scope systems and personnel under Identity & Access Management.",
-            "example_compliant_scenario": "A system owner within Identity & Access Management implements Service Account Governance in full: required controls are configured as specified, evidence such as dormant account review reports is retained and current, and the most recent internal review confirmed no open findings against this policy. When queried during an audit, the team produces the relevant identity lifecycle workflow configuration without delay.",
-            "example_non_compliant_scenario": "During a routine review, an auditor discovers that manual, undocumented provisioning outside the standard workflow. Further investigation reveals that dormant accounts with no expiration or review process, and no compensating control was documented. The finding is logged against IDM-002 with a High risk rating and routed to Director of Identity & Access Management for remediation per the defined timeline.",
-            "keywords": [
-                "identity lifecycle",
-                "provisioning",
-                "deprovisioning",
-                "joiner mover leaver",
-                "service account",
-                "identity governance",
-                "HR integration",
-                "dormant account",
-                "account ownership",
-                "offboarding",
-                "onboarding",
-                "system of record"
-            ],
-            "search_tags": [
-                "Identity Management",
-                "IAM",
-                "Lifecycle",
-                "Provisioning",
-                "Offboarding",
-                "Service Accounts",
-                "Governance",
-                "Security",
-                "HR Integration"
-            ],
-            "evidence_types": [
-                "Dormant account review reports",
-                "Identity lifecycle workflow configuration",
-                "HR-to-IT provisioning integration logs",
-                "Termination checklist records",
-                "Service account inventory and ownership register"
-            ]
-        },
-        {
-            "policy_id": "PWD-001",
-            "title": "Minimum Password Standards",
-            "category": "Password Security",
-            "risk_level": "High",
-            "department": "Identity & Access Management",
-            "owner": "Director of Identity & Access Management",
-            "version": "1.6",
-            "effective_date": "April 15, 2025",
-            "review_cycle": "Quarterly",
-            "priority": "High",
-            "status": "Active",
-            "business_objective": "Password security policies reduce the likelihood that credentials can be guessed, reused, or exposed, addressing one of the most common initial access vectors in security incidents. The Minimum Password Standards policy applies this principle specifically to minimum password standards, establishing a clear, auditable baseline that reduces the likelihood of a preventable security or compliance failure in this area.",
-            "policy_statement": "All systems, personnel, and processes within scope of Password Security must comply with the requirements defined under Minimum Password Standards, and exceptions must be formally documented and approved by Director of Identity & Access Management.",
-            "detailed_requirements": [
-                {
-                    "requirement_id": "PWD-001-R1",
-                    "requirement_text": "Passwords must be a minimum of twelve characters in length."
-                },
-                {
-                    "requirement_id": "PWD-001-R2",
-                    "requirement_text": "Passwords must not match any of the user's previous ten passwords."
-                },
-                {
-                    "requirement_id": "PWD-001-R3",
-                    "requirement_text": "Passwords must be checked against a known-breached-password list at creation time."
-                },
-                {
-                    "requirement_id": "PWD-001-R4",
-                    "requirement_text": "Password hashes must use a modern, salted, computationally expensive algorithm."
-                },
-                {
-                    "requirement_id": "PWD-001-R5",
-                    "requirement_text": "Passwords must not be stored in configuration files, source code, or documentation."
-                },
-                {
-                    "requirement_id": "PWD-001-R6",
-                    "requirement_text": "Forced periodic password rotation must not be used as a substitute for breach detection."
-                }
-            ],
-            "indicators_of_non_compliance": [
-                "Password reuse permitted across sequential changes",
-                "Hardcoded credentials found in source code or notebooks",
-                "Passwords visible in plaintext in logs or tickets",
-                "No breach-list screening at password creation"
-            ],
-            "required_evidence": [
-                "Password history enforcement settings",
-                "Breach-list screening integration logs",
-                "Password policy configuration exports",
-                "Hashing algorithm configuration",
-                "Source code scan results for embedded credentials"
-            ],
-            "recommended_remediation": "To remediate a violation of Minimum Password Standards, the accountable team should: (1) Update the password policy configuration to enforce minimum length and history requirements. (2) Migrate stored credentials to a salted, modern hashing algorithm and force a reset for affected accounts. Remediation actions must be tracked to closure and verified by an independent reviewer before the associated finding is closed.",
-            "related_policies": [
-                "PWD-002",
-                "INC-001",
-                "INC-002"
-            ],
-            "ai_summary": "Fictional Demo Document \u2014 Not a real compliance framework Page 20 This policy defines mandatory controls for minimum password standards within the Password Security domain, specifying required safeguards, common failure indicators, and evidence auditors should expect to see. It is classified as High risk and applies to all in-scope systems and personnel under Identity & Access Management.",
-            "example_compliant_scenario": "A system owner within Identity & Access Management implements Minimum Password Standards in full: required controls are configured as specified, evidence such as password history enforcement settings is retained and current, and the most recent internal review confirmed no open findings against this policy. When queried during an audit, the team produces the relevant breach-list screening integration logs without delay.",
-            "example_non_compliant_scenario": "During a routine review, an auditor discovers that password reuse permitted across sequential changes. Further investigation reveals that hardcoded credentials found in source code or notebooks, and no compensating control was documented. The finding is logged against PWD-001 with a High risk rating and routed to Director of Identity & Access Management for remediation per the defined timeline.",
-            "keywords": [
-                "salting",
-                "password reuse",
-                "breach list",
-                "password policy",
-                "password rotation",
-                "hardcoded credential",
-                "password history",
-                "credential storage",
-                "password",
-                "credential",
-                "hashing"
-            ],
-            "search_tags": [
-                "Hashing",
-                "Policy",
-                "Access Control",
-                "Password Security",
-                "Credentials",
-                "Authentication",
-                "IAM",
-                "Security"
-            ],
-            "evidence_types": [
-                "Password history enforcement settings",
-                "Breach-list screening integration logs",
-                "Password policy configuration exports",
-                "Hashing algorithm configuration",
-                "Source code scan results for embedded credentials"
-            ]
-        },
-        {
-            "policy_id": "PWD-002",
-            "title": "Credential Reuse Prevention",
-            "category": "Password Security",
-            "risk_level": "Medium",
-            "department": "Identity & Access Management",
-            "owner": "Director of Identity & Access Management",
-            "version": "1.4",
-            "effective_date": "October 22, 2025",
-            "review_cycle": "Quarterly",
-            "priority": "Medium",
-            "status": "Active",
-            "business_objective": "Password security policies reduce the likelihood that credentials can be guessed, reused, or exposed, addressing one of the most common initial access vectors in security incidents. The Credential Reuse Prevention policy applies this principle specifically to credential reuse prevention, establishing a clear, auditable baseline that reduces the likelihood of a preventable security or compliance failure in this area.",
-            "policy_statement": "All systems, personnel, and processes within scope of Password Security must comply with the requirements defined under Credential Reuse Prevention, and exceptions must be formally documented and approved by Director of Identity & Access Management.",
-            "detailed_requirements": [
-                {
-                    "requirement_id": "PWD-002-R1",
-                    "requirement_text": "Passwords must be checked against a known-breached-password list at creation time."
-                },
-                {
-                    "requirement_id": "PWD-002-R2",
-                    "requirement_text": "Password hashes must use a modern, salted, computationally expensive algorithm."
-                },
-                {
-                    "requirement_id": "PWD-002-R3",
-                    "requirement_text": "Passwords must not be stored in configuration files, source code, or documentation."
-                },
-                {
-                    "requirement_id": "PWD-002-R4",
-                    "requirement_text": "Forced periodic password rotation must not be used as a substitute for breach detection."
-                },
-                {
-                    "requirement_id": "PWD-002-R5",
-                    "requirement_text": "Password fields must be masked in all user interfaces by default."
-                }
-            ],
-            "indicators_of_non_compliance": [
-                "No breach-list screening at password creation",
-                "Passwords stored using reversible encryption or no hashing",
-                "Password reuse permitted across sequential changes",
-                "Hardcoded credentials found in source code or notebooks",
-                "Passwords visible in plaintext in logs or tickets"
-            ],
-            "required_evidence": [
-                "Source code scan results for embedded credentials",
-                "Password history enforcement settings",
-                "Breach-list screening integration logs",
-                "Password policy configuration exports",
-                "Hashing algorithm configuration"
-            ],
-            "recommended_remediation": "To remediate a violation of Credential Reuse Prevention, the accountable team should: (1) Migrate stored credentials to a salted, modern hashing algorithm and force a reset for affected accounts. (2) Revoke and rotate any credentials discovered hardcoded in source repositories. Remediation actions must be tracked to closure and verified by an independent reviewer before the associated finding is closed.",
-            "related_policies": [
-                "PWD-001",
-                "PATCH-001",
-                "PATCH-002"
-            ],
-            "ai_summary": "Fictional Demo Document \u2014 Not a real compliance framework Page 22 This policy defines mandatory controls for credential reuse prevention within the Password Security domain, specifying required safeguards, common failure indicators, and evidence auditors should expect to see. It is classified as Medium risk and applies to all in-scope systems and personnel under Identity & Access Management.",
-            "example_compliant_scenario": "A system owner within Identity & Access Management implements Credential Reuse Prevention in full: required controls are configured as specified, evidence such as source code scan results for embedded credentials is retained and current, and the most recent internal review confirmed no open findings against this policy. When queried during an audit, the team produces the relevant password history enforcement settings without delay.",
-            "example_non_compliant_scenario": "During a routine review, an auditor discovers that no breach-list screening at password creation. Further investigation reveals that passwords stored using reversible encryption or no hashing, and no compensating control was documented. The finding is logged against PWD-002 with a Medium risk rating and routed to Director of Identity & Access Management for remediation per the defined timeline.",
-            "keywords": [
-                "breach list",
-                "password policy",
-                "password rotation",
-                "hardcoded credential",
-                "password history",
-                "credential storage",
-                "password",
-                "credential",
-                "hashing",
-                "salting",
-                "password reuse"
-            ],
-            "search_tags": [
-                "Password Security",
-                "Credentials",
-                "Authentication",
-                "IAM",
-                "Security",
-                "Hashing",
-                "Policy",
-                "Access Control"
-            ],
-            "evidence_types": [
-                "Source code scan results for embedded credentials",
-                "Password history enforcement settings",
-                "Breach-list screening integration logs",
-                "Password policy configuration exports",
-                "Hashing algorithm configuration"
-            ]
-        },
-        {
-            "policy_id": "MFA-001",
-            "title": "Mandatory MFA for Administrative Access",
-            "category": "Multi-Factor Authentication",
-            "risk_level": "Critical",
-            "department": "Identity & Access Management",
-            "owner": "Director of Identity & Access Management",
-            "version": "3.3",
-            "effective_date": "March 15, 2025",
-            "review_cycle": "Semi-Annual",
-            "priority": "Critical",
-            "status": "Active",
-            "business_objective": "Multi-factor authentication reduces the risk that a single compromised credential leads to unauthorized account access by requiring an additional independent verification factor. The Mandatory MFA for Administrative Access policy applies this principle specifically to mandatory mfa for administrative access, establishing a clear, auditable baseline that reduces the likelihood of a preventable security or compliance failure in this area.",
-            "policy_statement": "All systems, personnel, and processes within scope of Multi-Factor Authentication must comply with the requirements defined under Mandatory MFA for Administrative Access, and exceptions must be formally documented and approved by Director of Identity & Access Management.",
-            "detailed_requirements": [
-                {
-                    "requirement_id": "MFA-001-R1",
-                    "requirement_text": "All administrative and privileged accounts must have MFA enabled without exception."
-                },
-                {
-                    "requirement_id": "MFA-001-R2",
-                    "requirement_text": "SMS-based MFA must not be used as the sole factor for privileged accounts."
-                },
-                {
-                    "requirement_id": "MFA-001-R3",
-                    "requirement_text": "MFA enrollment must occur before an account is granted production access."
-                },
-                {
-                    "requirement_id": "MFA-001-R4",
-                    "requirement_text": "MFA bypass or exemption requests must be approved by the security team and time-limited."
-                },
-                {
-                    "requirement_id": "MFA-001-R5",
-                    "requirement_text": "Backup MFA methods must be reviewed to ensure they do not weaken overall assurance."
-                },
-                {
-                    "requirement_id": "MFA-001-R6",
-                    "requirement_text": "MFA prompts must include contextual information to reduce approval fatigue and push-bombing risk."
-                }
-            ],
-            "indicators_of_non_compliance": [
-                "Permanent, undocumented MFA exemptions",
-                "Repeated MFA push approvals without user verification of context",
-                "MFA enrollment bypassed during account creation",
-                "Administrative accounts without MFA enabled",
-                "Reliance on SMS as the only second factor for privileged access"
-            ],
-            "required_evidence": [
-                "Identity provider MFA policy configuration",
-                "MFA exemption approval records",
-                "Authentication logs showing factor type used",
-                "Push notification configuration settings",
-                "MFA enrollment reports"
-            ],
-            "recommended_remediation": "To remediate a violation of Mandatory MFA for Administrative Access, the accountable team should: (1) Migrate privileged accounts from SMS-based MFA to a phishing-resistant factor. (2) Review and time-limit all existing MFA exemptions, requiring re-approval. Remediation actions must be tracked to closure and verified by an independent reviewer before the associated finding is closed.",
-            "related_policies": [
-                "MFA-002",
-                "DB-001",
-                "DB-002"
-            ],
-            "ai_summary": "This policy defines mandatory controls for mandatory mfa for administrative access within the Multi-Factor Authentication domain, specifying required safeguards, common failure indicators, and evidence auditors should expect to see. It is classified as Critical risk and applies to all in-scope systems and personnel under Identity & Access Management.",
-            "example_compliant_scenario": "A system owner within Identity & Access Management implements Mandatory MFA for Administrative Access in full: required controls are configured as specified, evidence such as identity provider mfa policy configuration is retained and current, and the most recent internal review confirmed no open findings against this policy. When queried during an audit, the team produces the relevant mfa exemption approval records without delay.",
-            "example_non_compliant_scenario": "During a routine review, an auditor discovers that permanent, undocumented mfa exemptions. Further investigation reveals that repeated mfa push approvals without user verification of context, and no compensating control was documented. The finding is logged against MFA-001 with a Critical risk rating and routed to Director of Identity & Access Management for remediation per the defined timeline.",
-            "keywords": [
-                "authenticator app",
-                "security key",
-                "assurance level",
-                "privileged access",
-                "MFA",
-                "multi-factor authentication",
-                "two-factor",
-                "second factor",
-                "push notification",
-                "SMS authentication",
-                "phishing-resistant"
-            ],
-            "search_tags": [
-                "Security",
-                "Privileged Access",
-                "Access Control",
-                "IAM",
-                "Policy",
-                "MFA",
-                "Authentication",
-                "Identity"
-            ],
-            "evidence_types": [
-                "Identity provider MFA policy configuration",
-                "MFA exemption approval records",
-                "Authentication logs showing factor type used",
-                "Push notification configuration settings",
-                "MFA enrollment reports"
-            ]
+          "requirement_id": "ENV-001-R2",
+          "requirement_text": "Compute workloads and operational activities must not be offshored to evade domestic reporting thresholds or carbon tax limits."
         }
-    ]
+      ],
+      "indicators_of_non_compliance": [
+        "Routing high-compute jobs to offshore subcontractors to avoid domestic emissions tracking",
+        "Failing to document Scope 2 emissions from third-party server hosting facilities",
+        "Missing carbon reporting documentation for regional facilities"
+      ],
+      "required_evidence": [
+        "Annual carbon accounting and emissions reports",
+        "Cloud hosting routing and configuration data",
+        "Subcontractor agreements for offshore compute workloads"
+      ],
+      "recommended_remediation": "Audit and incorporate all offshore compute activities into Scope 3 emissions calculations, adjust domestic compute loads, and establish strict tracking of all outsourced energy footprints.",
+      "related_policies": [
+        "TAX-001",
+        "PRIV-001"
+      ],
+      "ai_summary": "This policy mandates comprehensive annual reporting of Scope 1 and Scope 2 carbon emissions and strictly prohibits offshoring or subcontracting high-compute activities to evade domestic reporting limits or carbon tax liabilities.",
+      "example_compliant_scenario": "The company conducts an annual audit, reports all Scope 1 and Scope 2 emissions including cloud compute usage, and registers all external vendor emissions under Scope 3.",
+      "example_non_compliant_scenario": "The company routes AI training models to an overseas data center in an unregulated market to artificially reduce reported domestic carbon usage and avoid carbon offset purchases.",
+      "keywords": [
+        "EPA",
+        "Scope 1",
+        "Scope 2",
+        "emissions",
+        "offshore",
+        "carbon tax",
+        "sustainability",
+        "reporting",
+        "compute workloads"
+      ],
+      "search_tags": [
+        "Environmental Compliance",
+        "Emissions",
+        "EPA",
+        "Scope 1",
+        "Scope 2",
+        "Workload Offshoring",
+        "Carbon Reporting"
+      ],
+      "evidence_types": [
+        "Annual carbon accounting reports",
+        "Cloud infrastructure routing logs",
+        "Vendor compute agreements"
+      ]
+    },
+    {
+      "policy_id": "TAX-001",
+      "title": "Remote Employee Tax Nexus Law",
+      "category": "Financial Compliance",
+      "risk_level": "Medium",
+      "department": "Payroll & Human Resources",
+      "owner": "VP of Payroll and Benefits",
+      "version": "1.0",
+      "effective_date": "January 1, 2026",
+      "review_cycle": "Annual",
+      "priority": "Medium",
+      "status": "Active",
+      "business_objective": "Ensure accurate state payroll income tax withholding based on remote employee physical work location.",
+      "policy_statement": "Employers must adjust state payroll tax withholdings to match the remote employee's actual physical working location if they reside and work in a different state for more than 30 consecutive days. The company must implement active physical location check-ins or automated logs to track remote work state changes.",
+      "detailed_requirements": [
+        {
+          "requirement_id": "TAX-001-R1",
+          "requirement_text": "State income tax withholding must accurately match the employee's physical work location."
+        },
+        {
+          "requirement_id": "TAX-001-R2",
+          "requirement_text": "The company must actively track physical presence and trigger nexus payroll tax adjustments when remote work in another state exceeds 30 consecutive days."
+        }
+      ],
+      "indicators_of_non_compliance": [
+        "Remote employees working in a different state for >30 consecutive days under old tax codes",
+        "Absence of check-in mechanism or IP geolocation logs to verify remote work locations",
+        "Stale addresses in payroll system for known out-of-state remote workers"
+      ],
+      "required_evidence": [
+        "HR payroll configuration reports",
+        "Remote employee work location logs",
+        "IP login geolocation reports"
+      ],
+      "recommended_remediation": "Implement automated IP geolocation tracking for employees accessing systems and configure automated notifications to alert HR when an employee reaches 20 remote work days in a new state.",
+      "related_policies": [
+        "ENV-001",
+        "PRIV-001"
+      ],
+      "ai_summary": "This policy requires the tracking and adjusting of payroll tax withholding to align with the actual physical working state of remote employees who work out-of-state for more than 30 consecutive days.",
+      "example_compliant_scenario": "An employee moves to a new state, and the HR tracking system automatically triggers a payroll tax update to the new state after 30 days of remote IP logins.",
+      "example_non_compliant_scenario": "An employee works from a summer home in another state for three months, but payroll taxes continue to be withheld under their primary residence state due to lack of tracking.",
+      "keywords": [
+        "tax nexus",
+        "withholding",
+        "remote work",
+        "payroll",
+        "state tax",
+        "geolocation",
+        "residency"
+      ],
+      "search_tags": [
+        "Financial Compliance",
+        "Payroll",
+        "State Income Tax",
+        "Remote Employees",
+        "Tax Nexus"
+      ],
+      "evidence_types": [
+        "Payroll configuration logs",
+        "Work location logs",
+        "IP geolocation reports"
+      ]
+    },
+    {
+      "policy_id": "PRIV-001",
+      "title": "Customer Data Privacy & Opt-in Consent",
+      "category": "Data Privacy",
+      "risk_level": "Critical",
+      "department": "Data Governance & Legal",
+      "owner": "Chief Privacy Officer",
+      "version": "1.0",
+      "effective_date": "January 1, 2026",
+      "review_cycle": "Quarterly",
+      "priority": "High",
+      "status": "Active",
+      "business_objective": "Protect consumer data from unauthorized monetization and prevent coercive consent practices.",
+      "policy_statement": "Explicit, affirmative opt-in consent must be obtained from users before selling or sharing their personal data with external advertisers. Core services and software features must remain fully functional and performant even if the user declines consent.",
+      "detailed_requirements": [
+        {
+          "requirement_id": "PRIV-001-R1",
+          "requirement_text": "Explicit opt-in consent must be gathered prior to customer data monetization or sharing with advertising networks."
+        },
+        {
+          "requirement_id": "PRIV-001-R2",
+          "requirement_text": "Access to core features, performance, and services must not be degraded, restricted, or charged extra if data monetization consent is refused."
+        }
+      ],
+      "indicators_of_non_compliance": [
+        "User data transmitted to third-party ad networks without an explicit opt-in event",
+        "Core app functionality blocked or slow-tracked for users who opt out of monetization",
+        "Use of pre-checked check boxes or deceptive dark patterns to coerce consent"
+      ],
+      "required_evidence": [
+        "Signup flow screenshots and design documents",
+        "Network telemetry and ad SDK request logs",
+        "Feature flag and user access matrices"
+      ],
+      "recommended_remediation": "Implement a data privacy boundary in the API that blocks third-party SDK calls for users unless an explicit opt_in flag is set to true.",
+      "related_policies": [
+        "SEC-001",
+        "LEND-001"
+      ],
+      "ai_summary": "This policy mandates obtaining explicit user consent prior to data monetization and forbids degrading or restricting core services for users who opt out.",
+      "example_compliant_scenario": "A new customer signs up and checks 'No' to sharing data for ads; they access the entire portal at normal speed without data sharing.",
+      "example_non_compliant_scenario": "A user who opts out of data sharing finds that the load time of the dashboard is artificially throttled to 10 seconds to force them to opt in.",
+      "keywords": [
+        "privacy",
+        "consent",
+        "data monetization",
+        "advertising",
+        "opt-in",
+        "throttling"
+      ],
+      "search_tags": [
+        "Data Privacy",
+        "Consent Management",
+        "Data Sharing",
+        "User Rights",
+        "Opt-in"
+      ],
+      "evidence_types": [
+        "Consent database schema",
+        "API network logs",
+        "User interface workflow charts"
+      ]
+    },
+    {
+      "policy_id": "SEC-001",
+      "title": "Material Cybersecurity Incident Disclosure Act",
+      "category": "Incident Response",
+      "risk_level": "Critical",
+      "department": "Information Security",
+      "owner": "Chief Information Security Officer",
+      "version": "1.0",
+      "effective_date": "January 1, 2026",
+      "review_cycle": "Semi-Annual",
+      "priority": "High",
+      "status": "Active",
+      "business_objective": "Ensure public and regulatory bodies are promptly informed of material cyber risks and incidents.",
+      "policy_statement": "Publicly reportable cybersecurity incidents determined to be material to the organization's business, finances, or operations must be disclosed to the appropriate regulatory body within four (4) business days of the materiality determination. Materiality determinations must be formally documented and co-signed by the CISO and CFO.",
+      "detailed_requirements": [
+        {
+          "requirement_id": "SEC-001-R1",
+          "requirement_text": "Material cybersecurity incidents must be disclosed to regulators within four (4) business days of the materiality determination."
+        },
+        {
+          "requirement_id": "SEC-001-R2",
+          "requirement_text": "Materiality determinations must be formally documented and co-signed by both the CISO and the CFO."
+        }
+      ],
+      "indicators_of_non_compliance": [
+        "Regulatory filings for cyber breaches filed more than 4 business days after internal discovery and materiality determination",
+        "Lack of documented materiality assessments or missing executive signatures",
+        "Unstructured, verbal-only materiality evaluations with no audit trail"
+      ],
+      "required_evidence": [
+        "Incident response timeline logs",
+        "Signed materiality assessment records",
+        "Filed regulatory submissions"
+      ],
+      "recommended_remediation": "Establish a formal breach assessment protocol with SLA alerts for executive review and sign-off templates.",
+      "related_policies": [
+        "PRIV-001"
+      ],
+      "ai_summary": "This policy mandates public disclosure of material cyber incidents within 4 business days of determining materiality and requires signed executive documentation.",
+      "example_compliant_scenario": "The security operations center detects a data breach, evaluates the business impact, files a signed materiality report on day 2, and submits a regulatory disclosure on day 3.",
+      "example_non_compliant_scenario": "The company discovers an active database breach but keeps it quiet for 30 days during a forensic audit without documenting a formal materiality decision.",
+      "keywords": [
+        "incident response",
+        "disclosure",
+        "materiality",
+        "regulatory filing",
+        "CISO",
+        "CFO",
+        "breach"
+      ],
+      "search_tags": [
+        "Incident Response",
+        "Cybersecurity",
+        "Regulatory Disclosure",
+        "Materiality Assessment"
+      ],
+      "evidence_types": [
+        "Incident timelines",
+        "Signed materiality assessment PDFs",
+        "Form 8-K filings"
+      ]
+    },
+    {
+      "policy_id": "LEND-001",
+      "title": "CFPB Predatory Lending Cap",
+      "category": "Financial Compliance",
+      "risk_level": "Critical",
+      "department": "Lending Operations & Credit Risk",
+      "owner": "Head of Lending Operations",
+      "version": "1.0",
+      "effective_date": "January 1, 2026",
+      "review_cycle": "Semi-Annual",
+      "priority": "Critical",
+      "status": "Active",
+      "business_objective": "Protect consumers from predatory interest rates and hidden borrowing fees.",
+      "policy_statement": "Consumer micro-loans and credit products must not exceed an effective Annual Percentage Rate (APR) of no more than 36%. The APR calculation must be fully inclusive of all interest rates, processing fees, mandatory subscription models, account charges, and platform access costs.",
+      "detailed_requirements": [
+        {
+          "requirement_id": "LEND-001-R1",
+          "requirement_text": "The effective Annual Percentage Rate (APR) on all consumer loans and micro-loans must not exceed 36%."
+        },
+        {
+          "requirement_id": "LEND-001-R2",
+          "requirement_text": "The APR calculation must include all mandatory fees, subscriptions, and platform access charges required to obtain the loan."
+        }
+      ],
+      "indicators_of_non_compliance": [
+        "Loans marketed at 35% nominal APR but requiring a mandatory monthly platform subscription that pushes the effective rate above 36%",
+        "Loan calculators that omit mandatory platform fees from the APR disclosure",
+        "Charging mandatory administrative activation fees that are kept separate from the reported APR calculation"
+      ],
+      "required_evidence": [
+        "Standard customer loan agreement contracts",
+        "APR calculation algorithms and system config",
+        "Promotional landing pages and disclosures"
+      ],
+      "recommended_remediation": "Audit the pricing model to integrate all compulsory user fees into the APR calculation, updating the loan contract template to show the correct APR.",
+      "related_policies": [
+        "PRIV-001"
+      ],
+      "ai_summary": "This policy caps the effective APR for consumer loans at 36% and requires the calculation to encompass all mandatory fees and platform subscriptions.",
+      "example_compliant_scenario": "A loan has a 20% interest rate and a mandatory $2 fee, and the loan calculator combines both into a declared APR of 22%.",
+      "example_non_compliant_scenario": "A loan is offered at 29% interest but forces the user to buy a $10/month 'account care' subscription, bringing the effective APR to 45% without disclosing it.",
+      "keywords": [
+        "APR",
+        "lending",
+        "micro-loan",
+        "predatory lending",
+        "interest rate",
+        "CFPB",
+        "platform fee"
+      ],
+      "search_tags": [
+        "Financial Compliance",
+        "Consumer Protection",
+        "Predatory Lending",
+        "APR Caps",
+        "Lending Fees"
+      ],
+      "evidence_types": [
+        "Loan contracts",
+        "APR calculation templates",
+        "Fee disclosures"
+      ]
+    }
+  ]
 }

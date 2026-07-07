@@ -1,0 +1,90 @@
+{
+  "frameworks": {
+    "SOC2": {
+      "name": "SOC 2 Trust Services Criteria",
+      "description": "AICPA Trust Services Criteria for security, availability, and confidentiality"
+    },
+    "ISO27001": {
+      "name": "ISO/IEC 27001:2022",
+      "description": "International standard for information security management systems"
+    },
+    "NIST_CSF": {
+      "name": "NIST Cybersecurity Framework",
+      "description": "Identify, Protect, Detect, Respond, Recover functions"
+    }
+  },
+  "category_mappings": {
+    "Authentication": {
+      "SOC2": ["CC6.1", "CC6.2", "CC6.3"],
+      "ISO27001": ["A.5.16", "A.5.17", "A.8.5"],
+      "NIST_CSF": ["PR.AC-1", "PR.AC-7"]
+    },
+    "Environmental Compliance": {
+      "SOC2": ["CC1.1", "CC1.2"],
+      "ISO27001": ["A.5.31", "A.5.36"],
+      "NIST_CSF": ["GV.RR-2", "GV.RR-3"]
+    },
+    "Financial Compliance": {
+      "SOC2": ["CC1.3", "CC1.4"],
+      "ISO27001": ["A.5.36"],
+      "NIST_CSF": ["GV.RR-2"]
+    },
+    "Data Privacy": {
+      "SOC2": ["P1.1", "P1.2", "P2.1"],
+      "ISO27001": ["A.5.34", "A.8.28"],
+      "NIST_CSF": ["PR.DS-1", "PR.DS-2"]
+    },
+    "Incident Response": {
+      "SOC2": ["CC7.3", "CC7.4", "CC7.5"],
+      "ISO27001": ["A.5.24", "A.5.25", "A.5.26"],
+      "NIST_CSF": ["RS.MA-1", "RS.MA-2", "RS.MA-3"]
+    },
+    "Operations": {
+      "SOC2": ["CC2.1", "CC2.2"],
+      "ISO27001": ["A.5.37"],
+      "NIST_CSF": ["GV.OC-1", "GV.OC-2"]
+    },
+    "Physical Security": {
+      "SOC2": ["CC6.4", "CC6.5"],
+      "ISO27001": ["A.7.1", "A.7.2", "A.7.3"],
+      "NIST_CSF": ["PR.PE-1", "PR.PE-2"]
+    },
+    "Infrastructure": {
+      "SOC2": ["CC6.8", "CC8.1"],
+      "ISO27001": ["A.8.8", "A.8.9"],
+      "NIST_CSF": ["PR.PT-4", "PR.PT-5"]
+    },
+    "Authorization": {
+      "SOC2": ["CC6.1", "CC6.3", "CC6.7"],
+      "ISO27001": ["A.5.15", "A.5.18", "A.8.2"],
+      "NIST_CSF": ["PR.AC-4", "PR.AC-6"]
+    },
+    "Identity Management": {
+      "SOC2": ["CC6.2", "CC6.6", "CC6.7"],
+      "ISO27001": ["A.5.16", "A.6.3", "A.8.2"],
+      "NIST_CSF": ["PR.AC-1", "PR.IP-11"]
+    },
+    "Password Security": {
+      "SOC2": ["CC6.1", "CC6.2"],
+      "ISO27001": ["A.5.17", "A.8.5"],
+      "NIST_CSF": ["PR.AC-1", "PR.AC-7"]
+    },
+    "Multi-Factor Authentication": {
+      "SOC2": ["CC6.1", "CC6.6"],
+      "ISO27001": ["A.5.17", "A.8.5"],
+      "NIST_CSF": ["PR.AC-7"]
+    }
+  },
+  "policy_control_mappings": {
+    "AUTH-001": { "SOC2": ["CC6.1"], "ISO27001": ["A.5.17"], "NIST_CSF": ["PR.AC-1"] },
+    "AUTH-002": { "SOC2": ["CC6.1"], "ISO27001": ["A.5.17"], "NIST_CSF": ["PR.AC-7"] },
+    "AUTH-003": { "SOC2": ["CC6.2"], "ISO27001": ["A.5.16"], "NIST_CSF": ["PR.AC-1"] },
+    "AUTHZ-001": { "SOC2": ["CC6.3"], "ISO27001": ["A.5.15"], "NIST_CSF": ["PR.AC-4"] },
+    "AUTHZ-002": { "SOC2": ["CC6.3", "CC6.7"], "ISO27001": ["A.5.18"], "NIST_CSF": ["PR.AC-4"] },
+    "IDM-001": { "SOC2": ["CC6.2", "CC6.6"], "ISO27001": ["A.6.3"], "NIST_CSF": ["PR.IP-11"] },
+    "IDM-002": { "SOC2": ["CC6.6"], "ISO27001": ["A.5.16"], "NIST_CSF": ["PR.AC-1"] },
+    "PWD-001": { "SOC2": ["CC6.1"], "ISO27001": ["A.5.17"], "NIST_CSF": ["PR.AC-1"] },
+    "PWD-002": { "SOC2": ["CC6.1"], "ISO27001": ["A.5.17"], "NIST_CSF": ["PR.AC-7"] },
+    "MFA-001": { "SOC2": ["CC6.1", "CC6.6"], "ISO27001": ["A.8.5"], "NIST_CSF": ["PR.AC-7"] }
+  }
+}

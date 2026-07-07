@@ -15,10 +15,10 @@ if groq_api_key:
 else:
     llm = None
 
-def get_compliance_context() -> str:
+def get_compliance_context(user_id: str) -> str:
     """Loads the report.json to provide the LLM with current compliance status context."""
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    report_path = os.path.join(base_dir, "reports", "report.json")
+    report_path = os.path.join(base_dir, "reports", user_id, "report.json")
     
     if not os.path.exists(report_path):
         return "No compliance report generated yet."
@@ -40,7 +40,7 @@ def get_compliance_context() -> str:
         logger.error(f"Failed to load compliance context: {e}")
         return "Failed to load report."
 
-def ask_oracle(query: str, history: List[Dict[str, str]]) -> str:
+def ask_oracle(query: str, history: List[Dict[str, str]], user_id: str) -> str:
     """
     Query the Pinecone vectorstore and Groq LLM to answer user questions.
     history is a list of dicts: [{"role": "user", "content": "..."}]
@@ -50,7 +50,7 @@ def ask_oracle(query: str, history: List[Dict[str, str]]) -> str:
 
     # 1. Retrieve similar policies from Pinecone
     try:
-        vectorstore = get_vectorstore()
+        vectorstore = get_vectorstore(user_id)
         docs = vectorstore.similarity_search(query, k=5)
         retrieved_context = "\n\n".join([f"Policy Document:\n{doc.page_content}" for doc in docs])
     except Exception as e:
@@ -58,7 +58,7 @@ def ask_oracle(query: str, history: List[Dict[str, str]]) -> str:
         retrieved_context = "Could not retrieve company policies."
 
     # 2. Get Report Context
-    report_context = get_compliance_context()
+    report_context = get_compliance_context(user_id)
 
     # 3. Construct System Prompt
     system_prompt = f"""You are the 'Policy Oracle', an expert AI compliance assistant.

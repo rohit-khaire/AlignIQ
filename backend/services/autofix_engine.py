@@ -12,22 +12,22 @@ if groq_api_key:
 else:
     llm = None
 
-def run_autofix() -> Dict[str, Any]:
+def run_autofix(user_id: str) -> Dict[str, Any]:
     if not llm:
         raise ValueError("GROQ_API_KEY is not set.")
 
     # Paths
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    report_path = os.path.join(base_dir, "reports", "report.json")
-    company_policies_path = os.path.join(base_dir, "uploads", "company_policies.json")
+    report_path = os.path.join(base_dir, "reports", user_id, "report.json")
+    company_policies_path = os.path.join(base_dir, "uploads", user_id, "company_policies.json")
     master_policies_path = os.path.join(base_dir, "data", "master_policies.json")
-    remediated_path = os.path.join(base_dir, "reports", "remediated_policies.json")
+    remediated_path = os.path.join(base_dir, "reports", user_id, "remediated_policies.json")
 
     if not os.path.exists(report_path) or not os.path.exists(company_policies_path) or not os.path.exists(master_policies_path):
         raise FileNotFoundError("Required JSON files are missing. Run analysis first.")
 
-    hash_file_path = os.path.join(base_dir, "reports", "last_hash.txt")
-    remediated_hash_path = os.path.join(base_dir, "reports", "remediated_hash.txt")
+    hash_file_path = os.path.join(base_dir, "reports", user_id, "last_hash.txt")
+    remediated_hash_path = os.path.join(base_dir, "reports", user_id, "remediated_hash.txt")
     
     # Check if we can use cached remediated policies
     if os.path.exists(hash_file_path) and os.path.exists(remediated_hash_path) and os.path.exists(remediated_path):

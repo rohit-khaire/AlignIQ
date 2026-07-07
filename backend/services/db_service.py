@@ -19,6 +19,7 @@ def init_db():
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS compliance_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id TEXT NOT NULL,
         timestamp TEXT NOT NULL,
         score INTEGER NOT NULL,
         satisfied INTEGER NOT NULL,
@@ -27,48 +28,18 @@ def init_db():
     )
     ''')
     
-    # Check if we need to seed the database (if empty)
-    cursor.execute('SELECT COUNT(*) FROM compliance_logs')
-    count = cursor.fetchone()[0]
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        user_id TEXT PRIMARY KEY,
+        last_login TEXT,
+        docs_uploaded INTEGER DEFAULT 0
+    )
+    ''')
     
-    if count == 0:
-        logger.info("Database is empty. Seeding historical data for the CISO Dashboard...")
-        # Seed 30 days of synthetic data showing improvement
-        base_date = datetime.now() - timedelta(days=30)
-        
-        # Start at ~25%, end at current or ~80%
-        current_score = 25
-        satisfied = 10
-        partial = 5
-        missing = 45
-        
-        for i in range(30):
-            date_str = (base_date + timedelta(days=i)).isoformat()
-            
-            # Slight random fluctuations, but overall upward trend
-            if random.random() > 0.3:
-                improvements = random.randint(0, 3)
-                satisfied += improvements
-                missing = max(0, missing - improvements)
-                
-                partial_shifts = random.randint(0, 2)
-                partial += partial_shifts
-                missing = max(0, missing - partial_shifts)
-                
-            total_reqs = satisfied + partial + missing
-            score = int(((satisfied + (partial * 0.5)) / total_reqs) * 100) if total_reqs > 0 else 0
-            
-            cursor.execute('''
-            INSERT INTO compliance_logs (timestamp, score, satisfied, partial, missing)
-            VALUES (?, ?, ?, ?, ?)
-            ''', (date_str, score, satisfied, partial, missing))
-            
-        conn.commit()
-        logger.info("Historical data seeded successfully.")
-        
+    conn.commit()
     conn.close()
 
-def log_compliance_score(score: int, satisfied: int, partial: int, missing: int):
+def log_compliance_score(user_id: str, score: int, satisfied: int, partial: int, missing: int):
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -76,16 +47,16 @@ def log_compliance_score(score: int, satisfied: int, partial: int, missing: int)
         timestamp = datetime.now().isoformat()
         
         cursor.execute('''
-        INSERT INTO compliance_logs (timestamp, score, satisfied, partial, missing)
-        VALUES (?, ?, ?, ?, ?)
-        ''', (timestamp, score, satisfied, partial, missing))
+        INSERT INTO compliance_logs (user_id, timestamp, score, satisfied, partial, missing)
+        VALUES (?, ?, ?, ?, ?, ?)
+        ''', (user_id, timestamp, score, satisfied, partial, missing))
         
         conn.commit()
         conn.close()
     except Exception as e:
         logger.error(f"Failed to log compliance score: {e}")
 
-def get_historical_scores() -> list:
+def get_historical_scores(user_id: str) -> list:
     try:
         conn = get_connection()
         cursor = conn.cursor()
@@ -93,8 +64,9 @@ def get_historical_scores() -> list:
         cursor.execute('''
         SELECT timestamp, score, satisfied, partial, missing 
         FROM compliance_logs 
+        WHERE user_id = ?
         ORDER BY timestamp ASC
-        ''')
+        ''', (user_id,))
         
         rows = cursor.fetchall()
         conn.close()
@@ -113,3 +85,65 @@ def get_historical_scores() -> list:
     except Exception as e:
         logger.error(f"Failed to fetch historical scores: {e}")
         return []
+
+def upsert_user_login(user_id: str):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        timestamp = datetime.now().isoformat()
+        
+        cursor.execute('SELECT user_id FROM users WHERE user_id = ?', (user_id,))
+        row = cursor.fetchone()
+        
+        if row:
+            cursor.execute('UPDATE users SET last_login = ? WHERE user_id = ?', (timestamp, user_id))
+        else:
+            cursor.execute('INSERT INTO users (user_id, last_login, docs_uploaded) VALUES (?, ?, 0)', (user_id, timestamp))
+            
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        logger.error(f"Failed to upsert user login: {e}")
+
+def increment_docs_uploaded(user_id: str):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        # Ensure user exists before incrementing
+        cursor.execute('SELECT user_id FROM users WHERE user_id = ?', (user_id,))
+        if not cursor.fetchone():
+            timestamp = datetime.now().isoformat()
+            cursor.execute('INSERT INTO users (user_id, last_login, docs_uploaded) VALUES (?, ?, 0)', (user_id, timestamp))
+            
+        cursor.execute('UPDATE users SET docs_uploaded = docs_uploaded + 1 WHERE user_id = ?', (user_id,))
+        
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        logger.error(f"Failed to increment docs uploaded: {e}")
+
+def get_user_stats(user_id: str) -> dict:
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        
+        cursor.execute('SELECT last_login, docs_uploaded FROM users WHERE user_id = ?', (user_id,))
+        row = cursor.fetchone()
+        conn.close()
+        
+        if row:
+            return {
+                "last_login": row[0],
+                "docs_uploaded": row[1]
+            }
+        return {
+            "last_login": None,
+            "docs_uploaded": 0
+        }
+    except Exception as e:
+        logger.error(f"Failed to get user stats: {e}")
+        return {
+            "last_login": None,
+            "docs_uploaded": 0
+        }

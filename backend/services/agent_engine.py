@@ -25,12 +25,26 @@ AGENT_SLEEP_SECONDS = 2
 
 def _clean_json(content: str) -> str:
     content = content.strip()
-    if content.startswith("```json"):
-        content = content[7:]
-    elif content.startswith("```"):
-        content = content[3:]
-    if content.endswith("```"):
-        content = content[:-3]
+    start_list = content.find("[")
+    start_obj = content.find("{")
+    
+    if start_list != -1 and (start_obj == -1 or start_list < start_obj):
+        start = start_list
+        end = content.rfind("]")
+    elif start_obj != -1:
+        start = start_obj
+        end = content.rfind("}")
+    else:
+        if content.startswith("```json"):
+            content = content[7:]
+        elif content.startswith("```"):
+            content = content[3:]
+        if content.endswith("```"):
+            content = content[:-3]
+        return content.strip()
+        
+    if start != -1 and end != -1 and end > start:
+        return content[start:end+1].strip()
     return content.strip()
 
 
@@ -225,6 +239,7 @@ Legal Critique:
     prompt_4 = f"""You are the Lead Compliance Consultant producing the final strategic ruling.
 
 Synthesize Auditor, Legal, and Business perspectives into a final JSON ARRAY with exactly {expected_count} objects.
+You are generating a premium paid report, so ensure all fields contain highly specific, professional, and audit-grade content. Do not use generic answers or empty placeholders.
 
 For each requirement include ALL fields below. Use empty string or [] when Satisfied.
 
@@ -234,27 +249,27 @@ For each requirement include ALL fields below. Use empty string or [] when Satis
     "requirement_text": "...",
     "status": "Satisfied|Partially Satisfied|Not Satisfied",
     "confidence": 90,
-    "reasoning": "...",
-    "recommended_action": "...",
+    "reasoning": "Provide a detailed explanation of the compliance status based ONLY on the evidence.",
+    "recommended_action": "Provide specific, practical guidance to fix the gap.",
     "final_recommendation": "Remediate|Accept Risk|Compensating Control",
     "acceptable_risk": true,
-    "acceptable_risk_rationale": "Why the org can accept or must fix this gap",
-    "profit_preserving_loophole": "Specific policy language or workaround that preserves business flexibility/profit while managing risk. Empty if none.",
-    "profit_impact_if_remediated": "How strict remediation affects revenue, costs, or velocity",
-    "legal_position": "1-sentence legal counsel summary",
-    "business_position": "1-sentence business stakeholder summary",
-    "financial_risk_exposure": "Qualitative severity if exploited",
+    "acceptable_risk_rationale": "A compelling executive rationale of why the company can accept or must remediate this risk.",
+    "profit_preserving_loophole": "Specify exact policy language or phrasing (e.g., 'where operationally feasible') that preserves operational flexibility and revenue while meeting the requirement.",
+    "profit_impact_if_remediated": "A detailed assessment of how strict compliance will affect engineering velocity, direct costs, or business revenue.",
+    "legal_position": "1-sentence corporate counsel legal exposure assessment.",
+    "business_position": "1-sentence executive/operational stakeholder business stance.",
+    "financial_risk_exposure": "Qualitative financial liability or penalty severity if audited or exploited.",
     "implementation_effort": "Easy|Medium|Hard",
-    "boardroom_summary": "1-sentence executive summary",
-    "strategic_business_value": "Value unlocked by fixing OR value preserved by accepting risk",
-    "security_impact_analysis": "Technical security vector exposed",
-    "policy_loophole_identified": "Exact loophole in current policy language citing evidence",
-    "loophole_workaround": "How vague policy language could be interpreted to satisfy requirement without full remediation",
-    "workaround_risk_warning": "Audit/regulatory risk of relying on the workaround",
-    "auto_drafted_policy_patch": "Ready-to-copy policy paragraph to close the gap",
-    "target_document_placement": "Which company policy document to update",
-    "blast_radius": "Departments/systems exposed",
-    "step_by_step_runbook": ["Step 1", "Step 2"],
+    "boardroom_summary": "1-sentence executive summary suitable for the Board of Directors.",
+    "strategic_business_value": "The competitive advantage or cost saving unlocked by resolving this issue or accepting the risk.",
+    "security_impact_analysis": "Technical analysis of the vulnerability or security vector exposed by the policy gap.",
+    "policy_loophole_identified": "Cite the exact phrasing in the company policy that creates a compliance gap or loophole.",
+    "loophole_workaround": "How the current vague policy wording can be interpreted to avoid strict penalties in an audit.",
+    "workaround_risk_warning": "The risk rating or regulatory penalty of relying on this workaround instead of fixing it.",
+    "auto_drafted_policy_patch": "A ready-to-copy, professionally written 2-3 sentence policy amendment paragraph to insert directly into the company handbook to close the gap completely. Ensure it is fully written out and does not contain placeholders like '[Insert name here]'.",
+    "target_document_placement": "Specify the exact document section and paragraph index where the patch should be added.",
+    "blast_radius": "Departments, systems, or data repositories exposed by this policy gap.",
+    "step_by_step_runbook": ["Detailed implementation Step 1", "Detailed implementation Step 2", "Detailed implementation Step 3"],
     "supporting_evidence": [{{"company_policy_title":"...","evidence_snippet":"..."}}]
   }}
 ]

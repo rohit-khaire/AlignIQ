@@ -1,178 +1,108 @@
-# AlignIQ
+# AlignIQ - Enterprise Compliance Intelligence
 
-<p align="center">
-  <img src="frontend/public/AlignIQ-Logo.png" width="120" alt="AlignIQ Logo" />
-</p>
+![AlignIQ Logo](frontend/public/AlignIQ-Logo.png)
 
-AlignIQ is an AI-assisted compliance analysis platform for reviewing policy documents, identifying gaps against regulatory standards, and generating actionable remediation recommendations.
+AlignIQ is a working product that solves a practical enterprise problem: automating policy review, gap analysis, and remediation so security, privacy, and compliance teams can scale with confidence.
 
-The system combines a FastAPI backend with a React + TypeScript frontend so you can upload a policy PDF, run compliance analysis, inspect the results, and explore autofix and chat-based guidance in one experience.
+This repository is an active full‑stack prototype (backend + frontend + datasets). I am currently developing new features, improving extraction accuracy, and hardening the product for real deployments.
 
-## What the project does
+**Why AlignIQ matters**
+- Manual policy review is slow, inconsistent, and costly. AlignIQ automates evidence discovery, scoring, and remediation drafting so teams focus on decisions instead of paperwork.
+- The product standardizes assessments against a configurable master policy set and generates prioritized, auditable outputs.
 
-- Uploads policy documents in PDF format
-- Extracts content from the document and structures it for analysis
-- Compares policy sections against a master policy dataset
-- Produces a compliance report with findings and recommendations
-- Supports autofix suggestions, exportable reports, and a chat-style compliance assistant
-- Stores basic historical compliance score data locally for dashboard views
+**What AlignIQ does (high level)**
+- Ingests policy PDFs and converts them to structured policy JSON (hybrid: layout parser → regex fast-path → LLM fallback).
+- Indexes company policies in a vector store and compares them to `data/master_policies.json`.
+- Produces a scored compliance report with per-requirement evaluations, confidence, reasoning, and recommended actions.
+- Offers multi-agent "Deep Audit" investigations that produce a debate transcript and a final consensus evaluation for a selected master policy.
+- Auto-generates remediated policy drafts (Auto-Fixer) and exports (JSON, CSV, PDF, DOCX, MD).
+- Provides an interactive Policy Oracle chat assistant for follow-up questions and forensic review.
+- Delivers rich frontend dashboards: 3D knowledge graph, risk matrix, remediation roadmap, executive deck, and per-requirement runbooks.
 
-## Project structure
+**Key implemented features (detailed)**
+- Extraction pipeline: `backend/services/pdf_extractor.py` - PyMuPDF-based layout extraction, regex document fast-path, and GROQ LLM fallback for unstructured text.
+- Analysis engine: `backend/services/compliance_engine.py` - ingest, vector indexing (Pinecone), LLM-based per-requirement evaluation, scoring, and cancellation support.
+- Auto-Fix: `backend/services/autofix_engine.py` + frontend `AutoFixer.tsx` - produces consolidated remediated policy drafts per category and supports downloads in `docx`, `pdf`, `md`, and `json`.
+- Chat assistant: `backend/services/chatbot_engine.py` + frontend `ChatOracle.tsx` - lightweight conversational interface that uses analysis context to answer questions.
+- Multi-Agent Deep Audit: `backend/services/agent_engine.py` + `ReportDashboard` UI - runs multiple agent personas and returns a transcript, final consensus, and premium intelligence (financial exposure, runbooks, one-click patches).
+- Progress & control: live progress endpoint, cancel endpoint, and session reset to manage temporary uploads and vector DB namespaces.
+- Export & caching: cached reports use file-hash + session-id to avoid re-running expensive LLM work; export endpoints support JSON, CSV, PDF and remediated exports.
 
-```text
-AlignIQ/
-├── backend/
-│   ├── api/
-│   │   └── main.py
-│   ├── api/routes/compliance.py
-│   ├── services/
-│   │   ├── compliance_engine.py
-│   │   ├── pdf_extractor.py
-│   │   ├── autofix_engine.py
-│   │   ├── chatbot_engine.py
-│   │   └── export_service.py
-│   ├── data/
-│   │   ├── master_policies.json
-│   │   └── Enterprise_Compliance_Manual_Fictional_Demo.md
-│   ├── uploads/
-│   ├── reports/
-│   ├── requirements.txt
-│   └── .env.example
-├── frontend/
-│   ├── package.json
-│   ├── src/
-│   └── vite.config.ts
-└── README.md
-```
+**Important API endpoints**
+Base: `http://127.0.0.1:8000/api/v1/compliance`
+- `POST /analyze` — Upload PDF (header: `X-User-ID`, `X-Session-ID`) — returns report, consulting insights, extraction metadata. PDF size limit: 25MB.
+- `GET /progress` — Live analysis progress for UI.
+- `POST /cancel` — Cancel running analysis.
+- `POST /autofix` — Run AI Auto-Fixer; produces remediated_policies.json.
+- `GET /export` — Export the latest report (`?format=json|csv|pdf`).
+- `GET /export-remediated` — Export remediated policies (`?format=json|md|docx|pdf`).
+- `POST /chat` — Conversational queries to the Policy Oracle (body: `{query, history}`).
+- `POST /deep-audit` — Trigger multi-agent deep audit for a master policy id.
+- `GET /deep-audit/{policy_id}` — Retrieve the latest deep audit for a policy.
+- `GET /history` — Historical compliance score logs for a user.
+- `GET|POST /reset` — Reset session and delete temporary files for a user.
 
-## Tech stack
+**Authentication & headers**
+- The API respects the `X-User-ID` header for namespacing and persistence; pass `anonymous` when not using auth.
+- Frontend integrates with Clerk for optional auth; components read `userId` and set the header automatically.
 
-- Backend: Python, FastAPI, Pydantic, Uvicorn
-- Frontend: React, TypeScript, Vite, Tailwind-inspired UI components
-- AI integrations: Groq and Pinecone-based services for extraction, analysis, and reasoning
-- Data storage: SQLite for historical compliance score logs
+**Environment & keys**
+- Required for full functionality:
+  - `GROQ_API_KEY` — required for LLM extraction, analysis and remediation features.
+  - `PINECONE_API` or `PINECONE_API_KEY` — used for vector embeddings/storage (optional local fallbacks exist).
+- If these keys are absent, the system will run regex-only extraction and fail early for features that need LLM/vector access.
 
-## Prerequisites
-
-Make sure these are installed on your machine:
-
-- Python 3.10+
-- Node.js 18+
-- npm 9+
-- Git
-
-## Local development setup
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/rohit-khaire/AlignIQ.git
-cd AlignIQ
-```
-
-### 2. Set up the backend
-
+**Developer quick start**
+1. Backend
 ```bash
 cd backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
+# set GROQ_API_KEY and PINECONE_* in .env to enable full features
+uvicorn api.main:app --reload --host 127.0.0.1 --port 8000
 ```
-
-Open the new `.env` file and fill in the required values:
-
-```env
-PINECONE_API=your_pinecone_api_key
-PINECONE_HOST=your_pinecone_host
-PINECONE_INDEX=company-policies
-GROQ_API_KEY=your_groq_api_key
-```
-
-> The backend can start without these values, but the AI-driven analysis features will fail until the credentials are configured correctly.
-
-Start the API server:
-
-```bash
-uvicorn api.main:app --host 127.0.0.1 --port 8000 --reload
-```
-
-The backend will be available at:
-
-- http://127.0.0.1:8000
-- http://localhost:8000
-
-### 3. Set up the frontend
-
-Open a second terminal:
-
+2. Frontend (separate terminal)
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
+Open the UI at `http://localhost:5173` and point it to the backend at `http://127.0.0.1:8000` (default).
 
-The frontend will be available at:
+**Typical developer workflow**
+1. Start backend and frontend.
+2. Upload a policy PDF via the UI or `POST /analyze`.
+3. Monitor progress via `/progress` and the frontend progress bar.
+4. Review the `ReportDashboard` for prioritized gaps, use Auto-Fixer to generate remediated drafts, and consult the Policy Oracle for follow-ups.
+5. Use Deep Audit to get multi-agent reasoning and export remediations or the full report for audits.
 
-- http://localhost:5173
+**Where to look in the code**
+- API routes: `backend/api/routes/compliance.py`
+- Extraction: `backend/services/pdf_extractor.py`
+- Analysis & vector indexing: `backend/services/compliance_engine.py`, `backend/services/retrieval_utils.py`
+- Auto-fix / remediation: `backend/services/autofix_engine.py`
+- Agents & deep audit: `backend/services/agent_engine.py`
+- Frontend UI: `frontend/src/components/analyze` (key components: `ReportDashboard.tsx`, `AutoFixer.tsx`, `ChatOracle.tsx`, `KnowledgeGraph3D.tsx`, `ProgressTracker.tsx`).
 
-If your backend is running somewhere else, you can override the API URL:
+**Notes & operational considerations**
+- Caching: the backend caches analysis results using a SHA256 of the uploaded file and `X-Session-ID`. If a repeat upload with the same hash+session is detected, the cached report is returned to save LLM tokens.
+- Rate limits: LLM calls are rate-limited and may queue; Auto-Fixer includes delays to avoid exceeding free-tier limits.
+- Vector store: Pinecone eventual consistency is handled; clearing a namespace waits briefly for vector counts to drop.
+- Files: uploads are stored in `backend/uploads/<user_id>` and reports in `backend/reports/<user_id>`.
 
-```bash
-VITE_API_URL=http://127.0.0.1:8000 npm run dev
-```
+**Roadmap (active work)**
+- Improve extraction accuracy and regex coverage to reduce LLM fallback.
+- Add enterprise connectors (SharePoint, Google Drive, S3) and audit log exports.
+- Harden multi-agent orchestration and provide role-based access controls.
+- Add CI/CD, automated tests, and a cloud deployment guide.
 
-## Typical local workflow
+**Contributing**
+- Open an issue describing the feature or dataset you'd like to add.
+- Create a branch, implement, and submit a PR - include tests and a clear description of changes.
 
-1. Start the backend.
-2. Start the frontend.
-3. Open the frontend in your browser.
-4. Upload a PDF policy document.
-5. Wait for the compliance analysis to finish.
-6. Review the report, try autofix suggestions, and use the chat assistant for follow-up questions.
+**Author & contact**
+- Rohit Khaire — https://github.com/rohit-khaire
 
-## Main API endpoints
-
-Base URL: http://127.0.0.1:8000
-
-- GET `/` - Health/welcome endpoint
-- POST `/api/v1/compliance/analyze` - Upload a policy PDF and run analysis
-- GET `/api/v1/compliance/export` - Export the latest report as JSON, CSV, or PDF
-- POST `/api/v1/compliance/autofix` - Trigger remediation suggestions
-- POST `/api/v1/compliance/chat` - Ask the compliance assistant a question
-- GET `/api/v1/compliance/history` - Retrieve historical compliance score data
-- POST `/api/v1/compliance/reset` - Clear temporary uploaded files and generated reports
-
-Example upload with curl:
-
-```bash
-curl -X POST "http://127.0.0.1:8000/api/v1/compliance/analyze" \
-  -H "accept: application/json" \
-  -F "file=@/path/to/policy.pdf"
-```
-
-## Troubleshooting
-
-- If the frontend cannot reach the backend, confirm that the backend is running and that the API URL points to port 8000.
-- If analysis fails, verify your Groq and Pinecone environment variables in the backend `.env` file.
-- If Python dependencies fail to install, make sure your virtual environment is active and that you are using a compatible Python version.
-
-## Notes
-
-- Generated reports are written to the backend `reports` directory.
-- Uploaded files are stored under the backend `uploads` directory.
-- Local historical score logs are stored in the backend `data/compliance_history.db` SQLite database.
-
-## Contributing
-
-1. Create a feature branch.
-2. Make your changes.
-3. Test locally.
-4. Open a pull request with a clear summary of the update.
-
-## Author
-
-**Rohit Khaire**
-
-GitHub: https://github.com/rohit-khaire
 
